@@ -1,0 +1,55 @@
+.experience-rail {
+  --rail-gap: 13px;
+  overflow: hidden;
+  padding-inline: 0;
+  scroll-snap-type: none;
+}
+
+.experience-track {
+  display: flex;
+  gap: var(--rail-gap);
+  width: max-content;
+  will-change: transform;
+  animation: experience-marquee 46s linear infinite;
+}
+
+.experience-set {
+  display: flex;
+  gap: var(--rail-gap);
+}
+
+.experience-card {
+  opacity: 1;
+  scroll-snap-align: none;
+  transform: none;
+}
+
+.experience-meta {
+  justify-content: flex-end;
+}
+
+.experience-plus {
+  transform: rotate(0) scale(1);
+}
+
+@keyframes experience-marquee {
+  to {
+    transform: translateX(calc(-50% - var(--rail-gap) / 2));
+  }
+}
+
+@media (width <= 759px) {
+  .experience-track {
+    animation-duration: 36s;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .experience-track {
+    animation: none;
+  }
+
+  .experience-rail {
+    overflow-x: auto;
+  }
+}

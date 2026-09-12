@@ -22,16 +22,42 @@ const revealObserver = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('[data-reveal]').forEach((element) => revealObserver.observe(element));
 
-// Preview V2: mantém a estética atual e melhora apenas comportamento, clareza e prova social.
+// Preview V2: preserva o visual atual e melhora apenas comportamento e clareza.
 const enhancementStyles = document.createElement('style');
 enhancementStyles.textContent = `
-  .experience-rail { overflow: hidden !important; cursor: grab; touch-action: pan-y; user-select: none; }
+  .experience-rail {
+    overflow-x: auto !important;
+    cursor: grab;
+    touch-action: pan-y;
+    user-select: none;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory !important;
+  }
+  .experience-rail::-webkit-scrollbar { display: none; }
   .experience-rail.is-dragging { cursor: grabbing; }
-  .experience-track { animation: none !important; will-change: transform; }
+  .experience-track {
+    animation: none !important;
+    transform: none !important;
+    will-change: auto;
+  }
+  .experience-card { scroll-snap-align: center !important; }
   .experience-photo { -webkit-user-drag: none; user-select: none; }
-  .experience-photo[data-social-proof="true"] { object-position: center 42%; }
   .card-more { cursor: pointer; }
   .card-more:focus-visible { outline: 2px solid var(--orange); outline-offset: 5px; }
+
+  @media (width <= 759px) {
+    .experience-rail {
+      padding-inline: 16px !important;
+      scroll-padding-inline: 16px;
+    }
+    .experience-track,
+    .experience-set { gap: 12px !important; }
+    .experience-card {
+      flex: 0 0 calc(100vw - 32px) !important;
+      max-width: calc(100vw - 32px) !important;
+    }
+  }
 `;
 document.head.appendChild(enhancementStyles);
 
@@ -126,16 +152,6 @@ const experienceSets = [...document.querySelectorAll('.experience-set')];
 const filterButtons = [...document.querySelectorAll('.experience-filters button')];
 
 if (experienceRail && experienceTrack && experienceSets.length === 2) {
-  // Prova social mínima: apenas um card existente recebe um frame real da visita ao Full House.
-  const fullHouseCard = [...experienceSets[0].querySelectorAll('.experience-card')]
-    .find((card) => card.querySelector('.experience-partner')?.textContent.trim() === 'Full House Espetinhos');
-  const fullHouseImage = fullHouseCard?.querySelector('.experience-photo');
-  if (fullHouseImage) {
-    fullHouseImage.src = '/assets/fullhouse-real.svg';
-    fullHouseImage.alt = 'Experiência real +UM no Full House Espetinhos';
-    fullHouseImage.dataset.socialProof = 'true';
-  }
-
   const gastronomyCards = experienceSets[0].innerHTML;
   const moreCard = experienceSets[0].querySelector('.card-more')?.outerHTML ?? '';
   const otherExperiences = [
@@ -169,30 +185,47 @@ if (experienceRail && experienceTrack && experienceSets.length === 2) {
       </div>
     </article>`;
 
-  let railX = 0;
-  let dragging = false;
-  let pointerId = null;
-  let dragStartX = 0;
-  let dragStartRailX = 0;
-  let dragDistance = 0;
   let loopWidth = 1;
-  let lastFrame = performance.now();
-  let resumeAt = 0;
+  let stepWidth = 1;
+  let interacting = false;
+  let resumeTimer = null;
+  let normalizeTimer = null;
 
   const measureRail = () => {
-    const styles = getComputedStyle(experienceTrack);
-    const gap = parseFloat(styles.columnGap || styles.gap || '0') || 0;
-    loopWidth = experienceSets[0].getBoundingClientRect().width + gap;
-    if (!Number.isFinite(loopWidth) || loopWidth < 1) loopWidth = 1;
+    const firstSetLeft = experienceSets[0].offsetLeft;
+    const secondSetLeft = experienceSets[1].offsetLeft;
+    loopWidth = Math.max(1, secondSetLeft - firstSetLeft);
+
+    const cards = experienceSets[0].querySelectorAll('.experience-card');
+    if (cards.length > 1) {
+      stepWidth = Math.max(1, cards[1].offsetLeft - cards[0].offsetLeft);
+    } else if (cards[0]) {
+      stepWidth = Math.max(1, cards[0].getBoundingClientRect().width);
+    }
   };
 
   const normalizeRail = () => {
-    while (railX <= -loopWidth) railX += loopWidth;
-    while (railX > 0) railX -= loopWidth;
+    measureRail();
+    if (experienceRail.scrollLeft < loopWidth - 2) return;
+    experienceRail.style.scrollSnapType = 'none';
+    experienceRail.scrollLeft -= loopWidth;
+    requestAnimationFrame(() => {
+      experienceRail.style.scrollSnapType = '';
+    });
   };
 
-  const paintRail = () => {
-    experienceTrack.style.transform = `translate3d(${railX}px,0,0)`;
+  const scheduleNormalize = (delay = 500) => {
+    clearTimeout(normalizeTimer);
+    normalizeTimer = setTimeout(normalizeRail, delay);
+  };
+
+  const pauseAutoplay = () => {
+    interacting = true;
+    clearTimeout(resumeTimer);
+    resumeTimer = setTimeout(() => {
+      interacting = false;
+      scheduleNormalize(100);
+    }, 2200);
   };
 
   const wireMoreCards = () => {
@@ -203,7 +236,6 @@ if (experienceRail && experienceTrack && experienceSets.length === 2) {
       const copy = card.querySelector('p');
       if (copy) copy.textContent = 'Veja todas as experiências';
       const go = () => {
-        if (dragDistance > 8) return;
         window.location.href = 'https://app.appmaisum.com.br';
       };
       card.addEventListener('click', go);
@@ -216,49 +248,27 @@ if (experienceRail && experienceTrack && experienceSets.length === 2) {
     });
   };
 
-  const animateRail = (now) => {
-    const dt = Math.min(40, now - lastFrame);
-    lastFrame = now;
-    if (!dragging && now >= resumeAt && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      const speed = loopWidth / 46000;
-      railX -= speed * dt;
-      normalizeRail();
-      paintRail();
-    }
-    requestAnimationFrame(animateRail);
+  const advanceRail = () => {
+    if (interacting || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    measureRail();
+    experienceRail.scrollBy({ left: stepWidth, behavior: 'smooth' });
+    scheduleNormalize(750);
   };
 
-  experienceRail.addEventListener('pointerdown', (event) => {
-    if (event.pointerType === 'mouse' && event.button !== 0) return;
-    dragging = true;
-    pointerId = event.pointerId;
-    dragStartX = event.clientX;
-    dragStartRailX = railX;
-    dragDistance = 0;
+  experienceRail.addEventListener('pointerdown', () => {
     experienceRail.classList.add('is-dragging');
-    experienceRail.setPointerCapture?.(event.pointerId);
+    pauseAutoplay();
   });
 
-  experienceRail.addEventListener('pointermove', (event) => {
-    if (!dragging || event.pointerId !== pointerId) return;
-    const dx = event.clientX - dragStartX;
-    dragDistance = Math.max(dragDistance, Math.abs(dx));
-    railX = dragStartRailX + dx;
-    normalizeRail();
-    paintRail();
+  ['pointerup', 'pointercancel', 'pointerleave'].forEach((name) => {
+    experienceRail.addEventListener(name, () => {
+      experienceRail.classList.remove('is-dragging');
+      pauseAutoplay();
+      scheduleNormalize(250);
+    });
   });
 
-  const endRailDrag = (event) => {
-    if (!dragging || (event.pointerId != null && event.pointerId !== pointerId)) return;
-    dragging = false;
-    pointerId = null;
-    experienceRail.classList.remove('is-dragging');
-    resumeAt = performance.now() + 1200;
-  };
-
-  ['pointerup', 'pointercancel', 'lostpointercapture'].forEach((name) => {
-    experienceRail.addEventListener(name, endRailDrag);
-  });
+  experienceRail.addEventListener('wheel', pauseAutoplay, { passive: true });
 
   const renderExperiences = (category) => {
     const cards = category === 'Gastronomia'
@@ -275,11 +285,9 @@ if (experienceRail && experienceTrack && experienceSets.length === 2) {
       button.setAttribute('aria-pressed', String(active));
     });
 
-    railX = 0;
+    experienceRail.scrollLeft = 0;
     requestAnimationFrame(() => {
       measureRail();
-      normalizeRail();
-      paintRail();
       wireMoreCards();
     });
   };
@@ -290,13 +298,11 @@ if (experienceRail && experienceTrack && experienceSets.length === 2) {
 
   window.addEventListener('resize', () => {
     measureRail();
-    normalizeRail();
-    paintRail();
+    scheduleNormalize(50);
   });
 
   experienceRail.querySelectorAll('img').forEach((img) => img.setAttribute('draggable', 'false'));
   measureRail();
   wireMoreCards();
-  paintRail();
-  requestAnimationFrame(animateRail);
+  setInterval(advanceRail, 4200);
 }

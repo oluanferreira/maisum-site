@@ -26,38 +26,23 @@ document.querySelectorAll('[data-reveal]').forEach((element) => revealObserver.o
 const enhancementStyles = document.createElement('style');
 enhancementStyles.textContent = `
   .experience-rail {
-    overflow-x: auto !important;
+    overflow: hidden !important;
     cursor: grab;
     touch-action: pan-y;
     user-select: none;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-    scroll-snap-type: x mandatory !important;
   }
-  .experience-rail::-webkit-scrollbar { display: none; }
   .experience-rail.is-dragging { cursor: grabbing; }
   .experience-track {
     animation: none !important;
-    transform: none !important;
-    will-change: auto;
+    will-change: transform;
   }
-  .experience-card { scroll-snap-align: center !important; }
-  .experience-photo { -webkit-user-drag: none; user-select: none; }
+  .experience-card { scroll-snap-align: none !important; }
+  .experience-photo {
+    -webkit-user-drag: none;
+    user-select: none;
+  }
   .card-more { cursor: pointer; }
   .card-more:focus-visible { outline: 2px solid var(--orange); outline-offset: 5px; }
-
-  @media (width <= 759px) {
-    .experience-rail {
-      padding-inline: 16px !important;
-      scroll-padding-inline: 16px;
-    }
-    .experience-track,
-    .experience-set { gap: 12px !important; }
-    .experience-card {
-      flex: 0 0 calc(100vw - 32px) !important;
-      max-width: calc(100vw - 32px) !important;
-    }
-  }
 `;
 document.head.appendChild(enhancementStyles);
 
@@ -185,47 +170,29 @@ if (experienceRail && experienceTrack && experienceSets.length === 2) {
       </div>
     </article>`;
 
+  let railX = 0;
   let loopWidth = 1;
-  let stepWidth = 1;
-  let interacting = false;
-  let resumeTimer = null;
-  let normalizeTimer = null;
+  let dragging = false;
+  let activeRailPointer = null;
+  let dragStartClientX = 0;
+  let dragStartRailX = 0;
+  let dragDistance = 0;
+  let resumeAt = 0;
+  let lastFrame = performance.now();
 
   const measureRail = () => {
-    const firstSetLeft = experienceSets[0].offsetLeft;
-    const secondSetLeft = experienceSets[1].offsetLeft;
-    loopWidth = Math.max(1, secondSetLeft - firstSetLeft);
-
-    const cards = experienceSets[0].querySelectorAll('.experience-card');
-    if (cards.length > 1) {
-      stepWidth = Math.max(1, cards[1].offsetLeft - cards[0].offsetLeft);
-    } else if (cards[0]) {
-      stepWidth = Math.max(1, cards[0].getBoundingClientRect().width);
-    }
+    const firstLeft = experienceSets[0].offsetLeft;
+    const secondLeft = experienceSets[1].offsetLeft;
+    loopWidth = Math.max(1, secondLeft - firstLeft);
   };
 
   const normalizeRail = () => {
-    measureRail();
-    if (experienceRail.scrollLeft < loopWidth - 2) return;
-    experienceRail.style.scrollSnapType = 'none';
-    experienceRail.scrollLeft -= loopWidth;
-    requestAnimationFrame(() => {
-      experienceRail.style.scrollSnapType = '';
-    });
+    while (railX <= -loopWidth) railX += loopWidth;
+    while (railX > 0) railX -= loopWidth;
   };
 
-  const scheduleNormalize = (delay = 500) => {
-    clearTimeout(normalizeTimer);
-    normalizeTimer = setTimeout(normalizeRail, delay);
-  };
-
-  const pauseAutoplay = () => {
-    interacting = true;
-    clearTimeout(resumeTimer);
-    resumeTimer = setTimeout(() => {
-      interacting = false;
-      scheduleNormalize(100);
-    }, 2200);
+  const paintRail = () => {
+    experienceTrack.style.transform = `translate3d(${railX}px, 0, 0)`;
   };
 
   const wireMoreCards = () => {
@@ -235,40 +202,72 @@ if (experienceRail && experienceTrack && experienceSets.length === 2) {
       card.setAttribute('aria-label', 'Ver todas as experiências +UM');
       const copy = card.querySelector('p');
       if (copy) copy.textContent = 'Veja todas as experiências';
+
       const go = () => {
+        if (dragDistance > 8) return;
         window.location.href = 'https://app.appmaisum.com.br';
       };
+
       card.addEventListener('click', go);
       card.addEventListener('keydown', (event) => {
         if (event.key === 'Enter' || event.key === ' ') {
           event.preventDefault();
+          dragDistance = 0;
           go();
         }
       });
     });
   };
 
-  const advanceRail = () => {
-    if (interacting || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    measureRail();
-    experienceRail.scrollBy({ left: stepWidth, behavior: 'smooth' });
-    scheduleNormalize(750);
+  const animateRail = (now) => {
+    const dt = Math.min(34, Math.max(0, now - lastFrame));
+    lastFrame = now;
+
+    if (!dragging && now >= resumeAt && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const speed = loopWidth / 46000;
+      railX -= speed * dt;
+      normalizeRail();
+      paintRail();
+    }
+
+    requestAnimationFrame(animateRail);
   };
 
-  experienceRail.addEventListener('pointerdown', () => {
+  experienceRail.addEventListener('pointerdown', (event) => {
+    if (event.pointerType === 'mouse' && event.button !== 0) return;
+    dragging = true;
+    activeRailPointer = event.pointerId;
+    dragStartClientX = event.clientX;
+    dragStartRailX = railX;
+    dragDistance = 0;
+    resumeAt = Infinity;
     experienceRail.classList.add('is-dragging');
-    pauseAutoplay();
+    experienceRail.setPointerCapture?.(event.pointerId);
   });
 
-  ['pointerup', 'pointercancel', 'pointerleave'].forEach((name) => {
-    experienceRail.addEventListener(name, () => {
-      experienceRail.classList.remove('is-dragging');
-      pauseAutoplay();
-      scheduleNormalize(250);
-    });
+  experienceRail.addEventListener('pointermove', (event) => {
+    if (!dragging || event.pointerId !== activeRailPointer) return;
+
+    const dx = event.clientX - dragStartClientX;
+    dragDistance = Math.max(dragDistance, Math.abs(dx));
+    railX = dragStartRailX + dx;
+    normalizeRail();
+    paintRail();
   });
 
-  experienceRail.addEventListener('wheel', pauseAutoplay, { passive: true });
+  const endRailDrag = (event) => {
+    if (!dragging) return;
+    if (event.pointerId != null && event.pointerId !== activeRailPointer) return;
+
+    dragging = false;
+    activeRailPointer = null;
+    experienceRail.classList.remove('is-dragging');
+    resumeAt = performance.now() + 900;
+  };
+
+  ['pointerup', 'pointercancel', 'lostpointercapture'].forEach((name) => {
+    experienceRail.addEventListener(name, endRailDrag);
+  });
 
   const renderExperiences = (category) => {
     const cards = category === 'Gastronomia'
@@ -277,7 +276,7 @@ if (experienceRail && experienceTrack && experienceSets.length === 2) {
 
     experienceSets[0].innerHTML = cards;
     experienceSets[1].innerHTML = cards.replaceAll('<article ', '<article aria-hidden="true" ');
-    experienceRail.setAttribute('aria-label', `Experiências de ${category}. Arraste para explorar.`);
+    experienceRail.setAttribute('aria-label', `Experiências de ${category}. Arraste livremente para explorar.`);
 
     filterButtons.forEach((button) => {
       const active = button.textContent.trim() === category;
@@ -285,9 +284,12 @@ if (experienceRail && experienceTrack && experienceSets.length === 2) {
       button.setAttribute('aria-pressed', String(active));
     });
 
-    experienceRail.scrollLeft = 0;
+    railX = 0;
     requestAnimationFrame(() => {
+      experienceRail.querySelectorAll('img').forEach((img) => img.setAttribute('draggable', 'false'));
       measureRail();
+      normalizeRail();
+      paintRail();
       wireMoreCards();
     });
   };
@@ -298,11 +300,14 @@ if (experienceRail && experienceTrack && experienceSets.length === 2) {
 
   window.addEventListener('resize', () => {
     measureRail();
-    scheduleNormalize(50);
+    normalizeRail();
+    paintRail();
   });
 
   experienceRail.querySelectorAll('img').forEach((img) => img.setAttribute('draggable', 'false'));
   measureRail();
+  normalizeRail();
+  paintRail();
   wireMoreCards();
-  setInterval(advanceRail, 4200);
+  requestAnimationFrame(animateRail);
 }

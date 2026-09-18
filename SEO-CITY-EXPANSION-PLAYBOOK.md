@@ -204,6 +204,7 @@ Nunca:
 - [ ] atualizar Organization/Service areaServed quando apropriado
 - [ ] validar canonical/schema
 - [ ] testar indexabilidade
+- [ ] enviar URLs novas/alteradas via IndexNow após deploy
 
 ### Autoridade
 - [ ] kit de lançamento para parceiros
@@ -233,3 +234,18 @@ Implementação inicial:
 - 2 por 1: `/guias/vitoria-da-conquista/restaurantes-2-por-1/`
 
 Usar essa implementação como padrão estrutural, não como conteúdo para copiar literalmente.
+
+
+---
+
+## 10. IndexNow
+
+O domínio possui uma chave IndexNow hospedada na raiz. Após publicar páginas novas, alteradas ou removidas, enviar as URLs pelo endpoint oficial IndexNow.
+
+A submissão não garante indexação; ela apenas notifica mecanismos participantes de que a URL mudou.
+
+Fluxo:
+1. publicar em produção;
+2. confirmar HTTP 200 na URL pública;
+3. enviar a URL ao IndexNow;
+4. acompanhar no Bing Webmaster Tools quando o site estiver verificado.

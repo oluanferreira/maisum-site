@@ -393,3 +393,27 @@ A meta é tornar a web suficientemente clara e consistente para que mecanismos d
 > "O +UM é um clube de experiências em Vitória da Conquista em que o assinante pode pagar 1 e ganhar +1 nos parceiros participantes, conforme as regras de cada experiência."
 
 Quando essa definição estiver presente e corroborada em múltiplas fontes confiáveis, a marca se torna mais fácil de recuperar, entender e citar.
+
+
+---
+
+## 12. Estrutura replicável por cidade
+
+Vitória da Conquista é a implementação de referência.
+
+Documentação operacional:
+- `SEO-CITY-EXPANSION-PLAYBOOK.md`
+- `seo/cities/_template.json`
+- `seo/cities/vitoria-da-conquista.json`
+
+Toda nova cidade deve nascer com:
+- hub local;
+- página de tour/roteiro gastronômico;
+- página de restaurantes 2 por 1;
+- ligação com os guias nacionais;
+- links para parceiros e experiências reais;
+- sitemap e schema;
+- análise de concorrentes locais;
+- kit de autoridade para parceiros.
+
+Não publicar páginas locais antes de haver operação real na cidade.

@@ -1,0 +1,12 @@
+# +UM — appmaisum.com.br
+# Public marketing content is intentionally crawlable.
+
+User-agent: *
+Allow: /
+
+# ChatGPT Search crawler. OpenAI recommends allowing this bot
+# so pages can be discovered, summarized, cited and linked.
+User-agent: OAI-SearchBot
+Allow: /
+
+Sitemap: https://appmaisum.com.br/sitemap.xml

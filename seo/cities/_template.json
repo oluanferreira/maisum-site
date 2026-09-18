@@ -1,0 +1,30 @@
+{
+  "cityName": "{{CITY_NAME}}",
+  "stateName": "{{STATE_NAME}}",
+  "stateCode": "{{UF}}",
+  "slug": "{{city-slug}}",
+  "active": false,
+  "canonicalBase": "https://appmaisum.com.br/guias/{{city-slug}}",
+  "catalogUrl": "https://app.appmaisum.com.br",
+  "launchDate": null,
+  "minimumRequirements": {
+    "realOperation": true,
+    "confirmedPartners": true,
+    "uniqueLocalContent": true
+  },
+  "requiredPages": [
+    "{{city-slug}}/",
+    "{{city-slug}}/tour-gastronomico/",
+    "{{city-slug}}/restaurantes-2-por-1/"
+  ],
+  "clusters": [
+    "2 por 1",
+    "pague 1 ganhe 1",
+    "tour gastronômico",
+    "roteiro gastronômico",
+    "experiências para casal",
+    "onde comer gastando menos"
+  ],
+  "competitors": [],
+  "partnerExamples": []
+}

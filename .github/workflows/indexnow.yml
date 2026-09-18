@@ -7,6 +7,7 @@ on:
       - 'index.html'
       - 'index.md'
       - 'guias/**'
+      - 'parceiros/**'
       - 'sitemap.xml'
       - 'robots.txt'
       - 'llms.txt'

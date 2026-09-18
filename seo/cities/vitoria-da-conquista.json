@@ -1,0 +1,36 @@
+{
+  "cityName": "Vitória da Conquista",
+  "stateName": "Bahia",
+  "stateCode": "BA",
+  "slug": "vitoria-da-conquista",
+  "active": true,
+  "canonicalBase": "https://appmaisum.com.br/guias/vitoria-da-conquista",
+  "catalogUrl": "https://app.appmaisum.com.br",
+  "launchDate": "2026-09-18",
+  "requiredPages": [
+    "vitoria-da-conquista/",
+    "vitoria-da-conquista/tour-gastronomico/",
+    "vitoria-da-conquista/restaurantes-2-por-1/"
+  ],
+  "clusters": [
+    "2 por 1",
+    "pague 1 ganhe 1",
+    "tour gastronômico",
+    "roteiro gastronômico",
+    "circuito gastronômico",
+    "passaporte gastronômico",
+    "experiências para casal"
+  ],
+  "competitors": [
+    "Brasil em Dobro",
+    "Compre & Ganhe"
+  ],
+  "partnerExamples": [
+    "Casa Bar e Restaurante",
+    "Canto da Tati",
+    "Pizzaria Vitória",
+    "Full House Espetinhos",
+    "Espetinho Só na Brasa",
+    "MP Ranch"
+  ]
+}

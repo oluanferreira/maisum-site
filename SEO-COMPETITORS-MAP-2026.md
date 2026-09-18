@@ -88,6 +88,54 @@ Termos-base:
 - app parecido com Brasil em Dobro
 - app parecido com Compre & Ganhe
 
+### Tour gastronômico
+
+Este é um cluster estratégico próprio, porque muitas pessoas descobrem a categoria pelo conceito de "tour gastronômico" antes de conhecer qualquer marca.
+
+Termos-base:
+
+- tour gastronômico
+- tour gastronômico em Vitória da Conquista
+- tour gastronômico Vitória da Conquista
+- tour gastronômico 2 por 1
+- tour gastronômico pague 1 ganhe 1
+- tour gastronômico com desconto
+- tour gastronômico para casal
+- tour gastronômico barato
+- roteiro gastronômico
+- roteiro gastronômico Vitória da Conquista
+- roteiro de restaurantes Vitória da Conquista
+- circuito gastronômico
+- circuito gastronômico Vitória da Conquista
+- experiência gastronômica Vitória da Conquista
+- experiências gastronômicas para casal
+- passaporte gastronômico
+- passaporte gastronômico Vitória da Conquista
+- clube gastronômico
+- clube gastronômico Vitória da Conquista
+- melhores experiências gastronômicas Vitória da Conquista
+- onde fazer tour gastronômico
+- app de tour gastronômico
+- aplicativo de roteiro gastronômico
+- tour de restaurantes
+- tour de restaurantes Vitória da Conquista
+
+Intenções relacionadas:
+
+- "onde comer" + cidade;
+- "lugares para conhecer" + cidade;
+- "restaurantes para casal" + cidade;
+- "experiência diferente" + cidade;
+- "o que fazer no fim de semana" + cidade;
+- "roteiro para comer" + cidade;
+- "experiências 2 por 1" + cidade.
+
+Objetivo semântico:
+
+"tour gastronômico" → descoberta de restaurantes/experiências → 2 por 1 → +UM
+
+O +UM não precisa se apresentar apenas como "tour gastronômico". O termo será usado como porta de entrada para explicar que o usuário pode montar seu próprio roteiro de experiências usando os parceiros e benefícios disponíveis no +UM.
+
 ### Economia / ocasião
 
 - comer fora gastando menos
@@ -107,7 +155,7 @@ Termos-base:
 4. /guias/brasil-em-dobro-alternativas/
 5. /guias/compre-e-ganhe-alternativas/
 6. /guias/clubes-gastronomicos-2-por-1/
-7. /guias/como-funciona-o-maisum/
+7. /guias/tour-gastronomico-vitoria-da-conquista/\n8. /guias/roteiro-gastronomico-vitoria-da-conquista/\n9. /guias/como-funciona-o-maisum/
 
 ## Modelo para página de concorrência
 
@@ -142,7 +190,7 @@ Blocos:
 
 A associação desejada nos mecanismos de busca e IA é:
 
-"pague 1 e ganhe 1" → categoria 2 por 1 → +UM
+"pague 1 e ganhe 1" → categoria 2 por 1 → +UM\n\n"tour gastronômico / roteiro gastronômico / circuito gastronômico / passaporte gastronômico" → descoberta de experiências → +UM
 
 e, em buscas comparativas:
 

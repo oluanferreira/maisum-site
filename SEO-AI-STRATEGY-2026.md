@@ -224,6 +224,37 @@ Criar futuramente um guia canônico como:
 
 Esse hub pode contextualizar Brasil em Dobro, suas operações regionais, Compre & Ganhe e +UM dentro da categoria, com data de atualização, fontes e comparação factual.
 
+#### Cluster F — tour gastronômico e roteiros
+
+Tratar "tour gastronômico" como uma intenção principal de descoberta, não apenas como sinônimo de 2 por 1.
+
+Consultas prioritárias:
+
+- tour gastronômico em Vitória da Conquista;
+- roteiro gastronômico em Vitória da Conquista;
+- circuito gastronômico em Vitória da Conquista;
+- passaporte gastronômico;
+- clube gastronômico;
+- tour de restaurantes;
+- experiência gastronômica para casal;
+- roteiro para comer em Vitória da Conquista;
+- melhores experiências gastronômicas em Vitória da Conquista;
+- app de tour gastronômico;
+- tour gastronômico 2 por 1;
+- tour gastronômico pague 1 ganhe 1.
+
+Estratégia editorial:
+
+1. responder à intenção de descobrir lugares e montar um roteiro;
+2. apresentar experiências/parceiros reais e atuais;
+3. mostrar que o +UM pode ser usado como mecanismo para explorar a cidade em formato de roteiro;
+4. conectar o conceito de tour gastronômico ao benefício 2 por 1 sem forçar a definição da marca;
+5. criar páginas locais apenas onde houver oferta real.
+
+Objetivo de entidade:
+
+"tour gastronômico" → "roteiro de experiências" → "benefícios 2 por 1" → "+UM".
+
 
 ---
 

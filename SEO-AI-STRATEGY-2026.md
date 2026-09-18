@@ -2,7 +2,7 @@
 
 ## Objetivo
 
-Fazer o +UM ser encontrado, entendido e citado quando pessoas pesquisarem no Google, Google AI Overviews/AI Mode, ChatGPT Search e outros mecanismos de descoberta sobre experiências, restaurantes, benefícios e programas 2 por 1 em Vitória da Conquista.
+Fazer o +UM ser encontrado, entendido e citado quando pessoas pesquisarem no Google, Google AI Overviews/AI Mode, ChatGPT Search e outros mecanismos de descoberta sobre experiências, restaurantes, benefícios, programas 2 por 1 e alternativas a soluções concorrentes como Brasil em Dobro e Compre & Ganhe.
 
 A estratégia combina a Matrix de SEO do projeto com os pontos úteis do episódio "Vendo Sem Pagar Nem Um Anúncio | Flávio Muniz - Kiwicast #759", sem assumir promessas de ranking.
 
@@ -165,6 +165,65 @@ Manter em uma área própria para não misturar intenção B2C.
 - Quanto custa o +UM por colaborador?
 - O +UM funciona como benefício corporativo?
 - Como uma empresa de Vitória da Conquista pode oferecer o +UM ao time?
+
+#### Cluster E — concorrentes, alternativas e categoria
+
+Criar uma frente específica para capturar pessoas que já conhecem a categoria por meio de outras marcas.
+
+Concorrentes e ecossistemas monitorados:
+
+- Brasil em Dobro;
+- subdivisões/cidades da rede Brasil em Dobro, como POA em Dobro, Vitória em Dobro, Floripa em Dobro, Joinville em Dobro, BH em Dobro, Fortal em Dobro, Belém em Dobro, Manaus em Dobro e demais operações atuais;
+- Chapecó em Dobro e outras operações regionais ligadas ao mesmo conceito de "prato em dobro";
+- Compre & Ganhe.
+
+Intenções de busca prioritárias:
+
+- alternativa ao Brasil em Dobro;
+- aplicativo parecido com Brasil em Dobro;
+- Brasil em Dobro como funciona;
+- Brasil em Dobro vale a pena;
+- Brasil em Dobro x +UM;
+- Compre & Ganhe como funciona;
+- alternativa ao Compre & Ganhe;
+- Compre & Ganhe x +UM;
+- app de pague 1 ganhe 1;
+- app parecido com [marca/cidade em dobro];
+- clube 2 por 1;
+- tour gastronômico 2 por 1;
+- prato em dobro;
+- dois pratos pelo preço de um.
+
+Princípio editorial: as páginas devem responder à intenção do usuário de forma legítima. Nunca afirmar que o +UM é Brasil em Dobro, Compre & Ganhe ou uma operação oficial dessas marcas. Não usar logos, identidade visual ou texto copiado dos concorrentes.
+
+Formato recomendado:
+
+1. explicar objetivamente o que é a solução pesquisada;
+2. explicar a categoria 2 por 1;
+3. apresentar diferenças factuais;
+4. apresentar o +UM como alternativa quando fizer sentido;
+5. indicar claramente onde o +UM está disponível;
+6. levar para experiências/parceiros atuais.
+
+### Regra geográfica
+
+Não criar páginas artificiais do tipo "POA em Dobro alternativa" ou "Chapecó em Dobro alternativa" apenas para capturar tráfego se o +UM não opera naquela cidade.
+
+Para cidades onde o +UM ainda não opera, usar páginas editoriais nacionais/educativas que realmente comparem a categoria e as marcas. Quando o +UM entrar numa nova cidade, criar então a página local correspondente com conteúdo e oferta reais.
+
+Isso evita páginas doorway e mantém relevância para Google e sistemas de IA.
+
+### Hub nacional de categoria
+
+Criar futuramente um guia canônico como:
+
+- /guias/apps-2-por-1-brasil/
+- /guias/clubes-gastronomicos-2-por-1/
+- /guias/brasil-em-dobro-alternativas/
+- /guias/compre-e-ganhe-alternativas/
+
+Esse hub pode contextualizar Brasil em Dobro, suas operações regionais, Compre & Ganhe e +UM dentro da categoria, com data de atualização, fontes e comparação factual.
+
 
 ---
 

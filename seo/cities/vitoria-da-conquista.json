@@ -10,7 +10,10 @@
   "requiredPages": [
     "vitoria-da-conquista/",
     "vitoria-da-conquista/tour-gastronomico/",
-    "vitoria-da-conquista/restaurantes-2-por-1/"
+    "vitoria-da-conquista/restaurantes-2-por-1/",
+    "vitoria-da-conquista/o-que-fazer/",
+    "vitoria-da-conquista/onde-comer/",
+    "vitoria-da-conquista/lugares-para-casal/"
   ],
   "clusters": [
     "2 por 1",
@@ -19,7 +22,12 @@
     "roteiro gastronômico",
     "circuito gastronômico",
     "passaporte gastronômico",
-    "experiências para casal"
+    "experiências para casal",
+    "o que fazer em Vitória da Conquista",
+    "onde comer em Vitória da Conquista",
+    "lugares para casal em Vitória da Conquista",
+    "onde sair em Vitória da Conquista",
+    "melhores restaurantes em Vitória da Conquista"
   ],
   "competitors": [
     "Brasil em Dobro",

@@ -17,7 +17,9 @@ with sync_playwright() as p:
   assert page.evaluate("document.fonts.check('650 30px DM')"),'Font not loaded'
   assert not errors,errors
   assert page.evaluate("async()=>{const i=new Image();i.src='/links/assets/brand-3d.png';await i.decode();return i.naturalWidth>0}"), '3D artwork not loaded'
-  assert page.locator('[data-link]').count()==7
+  assert page.locator('[data-link]').count()==5
+  assert page.locator('.accounts').count()==0
+  assert page.locator('[data-link="app"], [data-link="partner-login"]').count()==0
   assert page.locator('[data-link="consumer"]').bounding_box()['height']>=60
   if width<=390 and height>=700:
    assert page.locator('[data-link="consumer"]').bounding_box()['y']+page.locator('[data-link="consumer"]').bounding_box()['height']<height,'Primary CTA below first screen'
@@ -37,6 +39,6 @@ with sync_playwright() as p:
  for audience in ['influencer','support-user','support-partner']:
   with page.expect_popup() as info:page.locator(f'[data-link="{audience}"]').click()
   popup=info.value;popup.wait_for_load_state();assert popup.url.startswith('https://wa.me/5577999571376?text=');popup.close()
- nojs=browser.new_context(java_script_enabled=False,viewport={'width':390,'height':844});np=nojs.new_page();np.goto('http://127.0.0.1:8124/links/');assert np.locator('[data-link]').count()==7;np.screenshot(path=str(OUT/'central-nojs.png'),full_page=True)
+ nojs=browser.new_context(java_script_enabled=False,viewport={'width':390,'height':844});np=nojs.new_page();np.goto('http://127.0.0.1:8124/links/');assert np.locator('[data-link]').count()==5;np.screenshot(path=str(OUT/'central-nojs.png'),full_page=True)
  browser.close()
 server.shutdown();(OUT/'results.json').write_text(json.dumps({'responsive':results,'affiliate_roundtrip':True,'whatsapp_intercepted':3,'no_js':True,'keyboard':True},indent=2));print('PASS: 6 viewports, no overflow/errors, font, affiliate checkout, no-JS, keyboard, WhatsApp destinations.')

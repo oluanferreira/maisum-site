@@ -36,3 +36,18 @@
 .hero-art-composition figcaption>span:first-child{font-weight:650;color:var(--ink)}
 @media(max-width:850px){.hero-art.hero-art-composition{width:min(100%,480px);max-width:480px;margin-top:8px}}
 @media(max-width:600px){.hero-art.hero-art-composition{width:100%;max-width:370px;margin-top:11px}.hero-art-composition figcaption{font-size:9px;margin-top:7px}.hero-art-composition .composition-halo{inset:7% 0 9%}}
+
+/* Mobile hero leads with the complete composition immediately after the title.
+   Display-contents lets the existing semantic copy participate in the grid;
+   all copy, prices and actions remain in the document, with no duplicate image. */
+@media(max-width:600px){
+ .hero{grid-template-columns:minmax(0,1fr);gap:0;align-items:start}
+ .hero-copy{display:contents}
+ .hero-copy>.eyebrow{grid-column:1;grid-row:1}
+ .hero-copy>h1{grid-column:1;grid-row:2}
+ .hero>.hero-art.hero-art-composition{grid-column:1;grid-row:3;margin-top:20px;margin-bottom:0;align-self:start}
+ .hero-copy>.hero-description{grid-column:1;grid-row:4;margin-top:24px}
+ .hero-copy>.hero-actions{grid-column:1;grid-row:5}
+ .hero-copy>.hero-price{grid-column:1;grid-row:6}
+ .hero-copy>.hero-facts{grid-column:1;grid-row:7;width:100%;margin-bottom:8px}
+}

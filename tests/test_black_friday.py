@@ -23,11 +23,12 @@ class BlackFridayContract(unittest.TestCase):
   for file in ['index.html','links/index.html','experiencias/template.html']:
    with self.subTest(file=file):
     source=(ROOT/file).read_text(); text=re.sub(r'<[^>]+>',' ',source)
-    for required in ['Black Friday','primeiro ano','Renovação anual','checkout']:
-     self.assertIn(required.lower(),text.lower())
+    required=['Black Friday','primeiro ano']
+    if file!='links/index.html':required+=['Renovação anual','checkout']
+    for copy in required:self.assertIn(copy.lower(),text.lower())
     self.assertRegex(text,r'47\s*,99')
     for stale in ['R$ 97','R$ 0,99','97,99']: self.assertNotIn(stale,text)
-    self.assertNotRegex(text.lower(),r'últimas vagas|só hoje|somente hoje|acaba em|até meia-noite')
+    self.assertNotRegex(text.lower(),r'últimas vagas|vagas limitadas|tempo limitado|só hoje|somente hoje|acaba em|até meia-noite')
  def test_annual_benefits_message(self):
   for file in ['index.html','links/index.html','experiencias/template.html']:
    text=re.sub(r'<[^>]+>',' ',(ROOT/file).read_text()).lower()

@@ -24,3 +24,18 @@
 
 /* Keep the name below the artwork, clear of the independent dessert cutouts. */
 .hero>.hero-host{display:flex;justify-content:center;gap:3px;margin:6px 0 0;font-size:9px;line-height:1.5}.hero>.hero-host>span{display:inline;margin:0;font-size:9px}
+
+/* Sculptural Black Friday campaign; keep the price and action as live text. */
+.passport.black-friday{padding-top:15px;padding-bottom:23px;background:radial-gradient(ellipse at 50% 0,#49271866,transparent 55%),#161616}
+.passport.black-friday .black-friday-art{display:block;width:220px;max-width:100%;height:auto;margin:0 auto 12px;filter:drop-shadow(0 8px 12px #0005)}
+.passport.black-friday .route-copy{max-width:none;width:100%;text-align:center}
+.passport.black-friday h2{font-size:26px;line-height:1.12;letter-spacing:-.8px}
+.passport.black-friday .route-copy>p{font-size:11px;max-width:250px;margin:9px auto 0;line-height:1.5}
+.passport.black-friday .passport-price{justify-content:center;margin-top:16px}
+.passport.black-friday .route-action{display:flex;justify-content:center;max-width:290px;margin:18px auto 0;min-height:48px}
+@media(min-width:440px){.passport.black-friday .black-friday-art{width:250px;margin-bottom:15px}.passport.black-friday h2{font-size:31px}.passport.black-friday .route-copy>p{font-size:12px;max-width:290px}.passport.black-friday .passport-price{margin-top:20px}}
+@media(max-width:350px){.passport.black-friday{padding-top:13px;padding-bottom:20px}.passport.black-friday .black-friday-art{width:185px;margin-bottom:10px}.passport.black-friday h2{font-size:23px;letter-spacing:-.75px}.passport.black-friday .route-copy>p{font-size:11px;max-width:225px}.passport.black-friday .passport-price{margin-top:14px}.passport.black-friday .route-action{margin-top:16px}}
+/* Match the shared tabletop baseline instead of leaving the bowls at the edge. */
+.hero-desserts{width:130px;left:24px;bottom:0;filter:drop-shadow(0 3px 3px #4530191a)}
+@media(min-width:440px){.hero-desserts{width:157px;left:28px;bottom:0}}
+@media(max-width:350px){.hero-desserts{width:105px;left:18px;bottom:2px}}

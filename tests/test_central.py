@@ -26,8 +26,11 @@ class CentralTests(unittest.TestCase):
   for key,url in expected.items():self.assertEqual(self.links[key]['href'],url)
  def test_black_friday_offer(self):
   self.assertIn('route passport black-friday',self.source)
-  for copy in ['BLACK FRIDAY +UM','1 ano inteiro','R$ 47,99','no primeiro ano','taxa incluída','Renovação anual']:self.assertIn(copy,self.source)
+  for copy in ['BLACK FRIDAY +UM','1 ano inteiro','R$ 47,99','no primeiro ano','black-friday-3d.webp']:self.assertIn(copy,self.source)
   self.assertNotIn('R$ 97',self.source)
+  self.assertNotIn('hero-host',self.source)
+  self.assertNotIn('Gastronomia em Conquista',self.source)
+  self.assertNotIn('passport-terms',self.source)
  def test_account_block_removed(self):
   for removed in ['Já faço parte','ACESSE SUA CONTA','Minha conta +UM','Painel do parceiro','Sou assinante','Sou estabelecimento','https://app.appmaisum.com.br','https://restaurante.appmaisum.com.br/login']:
    self.assertNotIn(removed,self.source)

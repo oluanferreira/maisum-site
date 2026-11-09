@@ -43,5 +43,5 @@
 /* One shared food scene supplies the table, perspective and contact shadows.
    The approved portrait pixels are unchanged; only its old food foreground is masked. */
 .leo-campaign{mask-image:none;-webkit-mask-image:none}
-.leo-campaign .leo-main{-webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 60%,transparent 65%);mask-image:linear-gradient(to bottom,#000 0%,#000 60%,transparent 65%)}
+.leo-campaign .leo-main{-webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 85%,transparent 100%);mask-image:linear-gradient(to bottom,#000 0%,#000 85%,transparent 100%)}
 .leo-campaign .hero-table{position:absolute;display:block;z-index:2;width:120%;max-width:none;height:auto;left:-20%;bottom:0;object-fit:contain;-webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 87%,transparent 100%);mask-image:linear-gradient(to bottom,#000 0%,#000 87%,transparent 100%)}

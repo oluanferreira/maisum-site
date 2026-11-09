@@ -1,7 +1,7 @@
 name: Central preview checks
 on:
   push:
-    branches: ['feat/central-pinterest-v3']
+    branches: ['feat/central-pinterest-v3', 'feat/central-3d-v4']
   pull_request:
 permissions:
   contents: read
@@ -24,6 +24,6 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: central-pinterest-qa
+          name: central-3d-qa
           path: qa-artifacts/
           if-no-files-found: ignore

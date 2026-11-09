@@ -39,7 +39,7 @@ class CentralTests(unittest.TestCase):
  def test_content_is_truthful_and_semantic(self):
   self.assertIn('Cadastro sujeito à aprovação.',self.source);self.assertIn('condições combinadas antes da divulgação.',self.source)
   self.assertNotRegex(re.sub(r'<[^>]+>','',self.source),r'\d+%')
-  self.assertIn('Fotos do acervo +UM: Pizzaria Vitória',self.source);self.assertEqual(self.source.count('<h1>'),1)
+  self.assertEqual(self.source.count('<h1>'),1)
   self.assertIn('lang="pt-BR"',self.source);self.assertIn('name="viewport"',self.source)
  def test_homepage_and_sales_files_unchanged(self):
   expected={'index.html': 'c7034102f1658cbb569cec70dbbd6096ce75f0144d88aacd4ef25e8a8f333010', 'styles.css': '8d343d3d4ec53e22192dac92403dff2d3218ed368a22d902968a5fbde9be64a5', 'script.js': '2e52f57efc7daa958047142134f1a6e656f44415cb1e15db3cd3c3a1e1f63051', 'oferta/index.html': '5746b863cc85a8d405c833a2348d07e08a72283c964334fbb6b34c8b4dd5e816'}

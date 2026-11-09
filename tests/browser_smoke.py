@@ -14,15 +14,18 @@ with sync_playwright() as p:
   errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
   page.goto('http://127.0.0.1:8124/links/',wait_until='networkidle');page.evaluate('document.fonts.ready')
   assert page.evaluate('document.documentElement.scrollWidth<=innerWidth'),width
-  assert page.evaluate("document.fonts.check('500 30px Cormorant')"),'Font not loaded'
+  assert page.evaluate("document.fonts.check('650 30px DM')"),'Font not loaded'
   assert not errors,errors
+  assert page.evaluate("async()=>{const i=new Image();i.src='/links/assets/brand-3d.png';await i.decode();return i.naturalWidth>0}"), '3D artwork not loaded'
   assert page.locator('[data-link]').count()==7
   assert page.locator('[data-link="consumer"]').bounding_box()['height']>=60
   if width<=390 and height>=700:
    assert page.locator('[data-link="consumer"]').bounding_box()['y']+page.locator('[data-link="consumer"]').bounding_box()['height']<height,'Primary CTA below first screen'
    assert page.locator('[data-link="register"]').bounding_box()['y']<height,'Second banner below first screen'
+  assert page.locator('[data-link]').evaluate_all('(links)=>links.every(a=>a.getBoundingClientRect().height>=44)'), 'Touch target too small'
   assert page.locator('img').evaluate_all('(images)=>images.filter(i=>i.loading!=="lazy").every(i=>i.complete && i.naturalWidth>0)'), 'Missing eager image'
   page.screenshot(path=str(OUT/f'central-{width}x{height}.png'),full_page=True)
+  if width==390 and height==844:page.screenshot(path=str(OUT/'central-mobile-first-screen.png'))
   results.append({'width':width,'height':height,'overflow':False,'font_loaded':True,'js_errors':errors,'image_assets_loaded':True});page.close()
  page=browser.new_page(viewport={'width':390,'height':844})
  page.goto('http://127.0.0.1:8124/links/?affiliate=test_creator',wait_until='networkidle')

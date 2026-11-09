@@ -104,3 +104,71 @@
 .black-friday-offer>.button:hover{background:#ffcb9d}
 @media(max-width:600px){.black-friday-buy{background:#191a18f7;color:#faf7f2;border-color:#3a3c34}.black-friday-buy>div{flex:1}.black-friday-buy>div>span,.black-friday-buy>div>small{color:#deddd6}.black-friday-buy>div>small{display:block;font-size:8px;line-height:1.45;margin-top:3px;max-width:155px}.black-friday-buy>a{background:#ffb77f;color:#24231f;flex:none;font-size:10px;padding-inline:14px;gap:10px}.black-friday-offer .offer-price>strong{font-size:92px}.black-friday-offer .offer-price>span{font-size:20px}.black-friday-offer .offer-price small{font-size:10px}.site-footer{padding-bottom:140px}}
 @media(max-width:355px){.black-friday-offer .offer-price>strong{font-size:84px}.black-friday-offer .offer-price>span{font-size:18px}.black-friday-offer .offer-price small{font-size:9px}.black-friday-buy>a{padding-inline:12px}.black-friday-buy>div>span{font-size:8px}}
+
+/* A proper campaign panel in the hero, using the biosite's 3D lettering. */
+.hero-promo{background:#191a18;color:#faf7f2;border:1px solid #35382f;border-radius:22px;padding:19px 23px 17px;max-width:470px;margin-top:24px;box-shadow:0 12px 28px #29241a0b}
+.hero-promo-top{display:flex;align-items:center;justify-content:space-between;gap:18px}
+.hero-promo-top>img{width:47%;max-width:188px;height:auto;object-fit:contain}
+.hero-promo-top>p{font-size:20px;font-weight:600;line-height:1.13;letter-spacing:-.5px}
+.hero-promo-top em{font-family:var(--serif);font-size:1.45em;color:#ffb77f;font-weight:500}
+.hero-promo .hero-price{display:flex;align-items:center;gap:18px;justify-content:space-between;margin-top:13px;line-height:1.45;color:#deddd4}
+.hero-promo .hero-price>strong{font-size:43px;line-height:1.05;letter-spacing:-1.8px;font-weight:650;white-space:nowrap;color:#faf7f2}
+.hero-promo .hero-price>span{font-size:11px;line-height:1.5;flex:none}
+.hero-promo .hero-actions{display:block;margin-top:15px}
+.hero-promo .hero-actions>.button{width:100%;min-height:49px;background:#ffb77f;color:#24231f;font-size:12px;padding:13px 18px}
+.hero-promo .hero-actions>.button:hover{background:#ffca9a}
+.hero-promo-terms{font-size:10px;line-height:1.6;color:#d4d3ca;margin-top:11px}
+.hero-discover{margin-top:14px;font-size:12px}
+.hero-food-extras{left:5%;right:auto;bottom:6.2%;width:40%;gap:0}
+.hero-food-extras>img:only-child{width:100%}
+@media(max-width:850px){
+ .hero-copy>.hero-promo{grid-column:1/-1;grid-row:4;width:100%;max-width:470px;justify-self:start;margin-top:22px}
+ .hero-copy>.hero-discover{grid-column:1/-1;grid-row:5;justify-self:start}
+ .hero-copy>.hero-facts{grid-row:6}
+ .hero-food-extras{left:5%;right:auto;bottom:6.2%;width:40%}
+ .hero-food-extras>img:only-child{width:100%}
+}
+@media(max-width:600px){
+ .hero-promo{padding:17px 18px 15px;border-radius:20px}
+ .hero-promo-top>img{width:49%;max-width:174px}
+ .hero-promo-top>p{font-size:19px}
+ .hero-promo .hero-price>strong{font-size:38px}
+ .hero-promo .hero-price>span{font-size:10px}
+ .hero-promo .hero-price{gap:12px;margin-top:12px}
+ .hero-promo .hero-actions>.button{font-size:12px}
+}
+@media(max-width:355px){.hero-promo-top{gap:10px}.hero-promo-top>p{font-size:16px}.hero-promo .hero-price>strong{font-size:34px}.hero-promo .hero-price>span{font-size:9px}.hero-promo .hero-price{gap:8px}.hero-promo-terms{font-size:9px}}
+
+/* Food, a tactile phone mockup and a human moment give the three steps rhythm. */
+.how-section{background:#eee8dd}
+.how-section .steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.how-section .steps>li{padding:0;border:1px solid #ded6c8;border-radius:24px;overflow:hidden;background:var(--paper);min-width:0}
+.step-visual{height:245px;position:relative;overflow:hidden;background:#e6dbcb}
+.step-visual>img{width:100%;height:100%;object-fit:cover}
+.step-food>img{object-position:50% 49%}
+.step-company>img{object-position:50% 50%}
+.step-photo-pill{position:absolute;left:17px;bottom:17px;padding:8px 12px;font-size:10px;font-weight:650;background:var(--paper);border-radius:30px}
+.step-visual-label{position:absolute;bottom:11px;right:12px;font-size:8px;line-height:1.4;background:#faf7f2e8;color:#454139;border-radius:5px;padding:4px 6px}
+.step-body{padding:23px 23px 25px}
+.how-section .steps .step-top{margin:0 0 15px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.how-section .steps .step-number{display:grid;place-items:center;width:34px;height:34px;background:#24231f;color:#faf7f2;border-radius:50%;font-size:11px;line-height:1;flex:none}
+.step-kicker{font-size:8px;letter-spacing:1px;text-transform:uppercase;color:#777063;text-align:right}
+.how-section .steps h3{font-size:22px;line-height:1.15;letter-spacing:-.7px;margin:0 0 13px;padding:0}
+.how-section .steps p{font-size:13px;line-height:1.75;min-height:70px;max-width:none}
+.how-section .steps a{min-height:44px;font-size:12px;margin-top:13px}
+.how-section .step-footnote{font-size:10px;line-height:1.6;margin-top:17px}
+.step-phone-scene{background:#e4d8c6;display:grid;place-items:center;isolation:isolate}
+.step-orbit{position:absolute;width:240px;height:240px;left:50%;top:50%;transform:translate(-50%,-50%);border-radius:50%;border:1px solid #c8b99f;background:radial-gradient(ellipse,#f8e6ca,#d4bea0)}
+.step-phone{position:relative;width:157px;height:245px;border:7px solid #24231f;background:var(--paper);border-radius:25px;box-shadow:11px 15px 0 #86735828;transform:translateY(12px) rotate(-8deg);padding:13px 8px 9px;overflow:hidden}
+.phone-camera{position:absolute;top:6px;left:50%;transform:translateX(-50%);height:5px;width:29px;border-radius:9px;background:#24231f}
+.phone-brand{display:block;font-size:22px;letter-spacing:-2px;font-weight:800;line-height:1.2;margin:2px 0 8px}
+.phone-brand b{color:var(--orange)}
+.step-phone>img{width:100%;height:60px;border-radius:8px;object-fit:cover;object-position:center}
+.phone-ticket{margin-top:8px;padding:10px 10px 7px;background:#ffdec0;border-radius:9px;border:1px solid #eac49f}
+.phone-ticket>small{display:block;font-size:6px;font-weight:700;letter-spacing:1px;color:#765032}
+.phone-ticket>strong{display:block;font-size:19px;letter-spacing:-.8px;line-height:1.05;margin-top:4px}
+.phone-ticket>span{display:block;font-size:7px;margin-top:7px;color:#6b503a}
+.ticket-dots{border-top:1px dashed #bd9877;padding-top:4px;margin-top:6px;font-size:14px;font-weight:700;line-height:1;letter-spacing:3px}
+@media(max-width:1100px){.step-visual{height:220px}.step-body{padding:20px 18px}.how-section .steps h3{font-size:20px}.how-section .steps p{font-size:12px;min-height:84px}.step-kicker{font-size:7px}}
+@media(max-width:850px){.how-section .steps{grid-template-columns:1fr;gap:23px}.how-section .steps>li{display:grid;grid-template-columns:42% minmax(0,1fr)}.step-visual{height:100%;min-height:260px}.step-body{padding:27px}.how-section .steps p{min-height:0;font-size:13px}.how-section .steps h3{font-size:24px}.step-kicker{font-size:8px}.step-phone{transform:rotate(-8deg)}}
+@media(max-width:600px){.how-section .steps>li{display:block;border-radius:21px}.step-visual{height:215px;min-height:0}.step-body{padding:22px}.how-section .steps h3{font-size:23px}.how-section .steps p{font-size:13px;min-height:0;max-width:none}.how-section .steps a{margin-top:12px}.step-phone{height:239px;transform:translateY(19px) rotate(-8deg)}.step-kicker{font-size:8px}.step-visual-label{font-size:8px}}

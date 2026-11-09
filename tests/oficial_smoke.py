@@ -28,6 +28,13 @@ with sync_playwright() as p:
   assert page.locator('.hero-food-extras').count()==1
   assert page.locator('.hero-food-extras img').count()==1
   assert page.locator('.hero-food-extras img').get_attribute('alt')==''
+  assert page.locator('.hero-promo').count()==1
+  assert page.locator('.hero-promo-top img').get_attribute('src')=='/links/assets/black-friday-3d.webp'
+  assert page.locator('.hero-promo').evaluate('(el)=>getComputedStyle(el).backgroundColor==="rgb(25, 26, 24)"')
+  assert page.locator('.step-card').count()==3
+  assert page.locator('.step-visual img').count()==3
+  assert page.locator('.step-company img').get_attribute('src')=='/oficial/assets/steps-companhia.webp'
+  assert 'ilustrativo' in page.locator('.step-phone-scene').inner_text().lower()
   assert page.locator('.hero-composition').count()==1
   assert page.locator('.hero-art .food-float, .hero-art .portrait-frame').count()==0
   assert page.locator('.hero-composition').evaluate('(img)=>getComputedStyle(img).objectFit==="contain"')
@@ -56,6 +63,10 @@ with sync_playwright() as p:
   page.screenshot(path=str(OUT/f'home-{width}x{height}.png'),full_page=True)
   if width==390:page.screenshot(path=str(OUT/'home-mobile-first-screen.png'))
   if width==1440:page.screenshot(path=str(OUT/'home-desktop-first-screen.png'))
+  if width in (390,1440):
+   page.locator('.how-section').screenshot(path=str(OUT/f'how-{width}.png'))
+   page.locator('.hero-promo').screenshot(path=str(OUT/f'hero-promo-{width}.png'))
+   page.evaluate('window.scrollTo(0,0)')
   if width<=850:
    page.locator('.menu-toggle').click();assert page.locator('#mobile-nav').is_visible()
    page.keyboard.press('Escape');assert not page.locator('#mobile-nav').is_visible()

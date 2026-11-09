@@ -21,9 +21,13 @@ class CentralTests(unittest.TestCase):
   cls.source=(ROOT/'links/index.html').read_text();cls.doc=Document(cls.source)
   cls.links={a['data-link']:a for a in cls.doc.links if 'data-link' in a}
  def test_all_audiences_and_verified_destinations(self):
-  expected={'consumer':'/experiencias','passport':'https://pay.cakto.com.br/3e7t64x_1061003','register':'https://restaurante.appmaisum.com.br/cadastro'}
+  expected={'consumer':'/experiencias','passport':'https://pay.cakto.com.br/3e7t64x_1061003?coupon=blackmaisum','register':'https://restaurante.appmaisum.com.br/cadastro'}
   self.assertEqual(set(self.links),set(expected)|{'influencer','support-user','support-partner'})
   for key,url in expected.items():self.assertEqual(self.links[key]['href'],url)
+ def test_black_friday_offer(self):
+  self.assertIn('route passport black-friday',self.source)
+  for copy in ['BLACK FRIDAY +UM','1 ano inteiro','R$ 47,99','no primeiro ano','taxa incluída','Renovação anual']:self.assertIn(copy,self.source)
+  self.assertNotIn('R$ 97',self.source)
  def test_account_block_removed(self):
   for removed in ['Já faço parte','ACESSE SUA CONTA','Minha conta +UM','Painel do parceiro','Sou assinante','Sou estabelecimento','https://app.appmaisum.com.br','https://restaurante.appmaisum.com.br/login']:
    self.assertNotIn(removed,self.source)

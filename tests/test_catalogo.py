@@ -28,7 +28,7 @@ class CatalogContract(unittest.TestCase):
   self.assertGreater(unknown,0);self.assertNotRegex(self.page,r'R\$\s*(?:&nbsp;)?0,00')
  def test_safe_verified_links_and_assets(self):
   checkouts=[a['href'] for t,a in self.dom.nodes if t=='a' and 'data-checkout' in a];self.assertGreaterEqual(len(checkouts),3)
-  self.assertEqual(set(checkouts),{'https://pay.cakto.com.br/3e7t64x_1061003'})
+  self.assertEqual(set(checkouts),{'https://pay.cakto.com.br/3e7t64x_1061003?coupon=blackmaisum'})
   for t,a in self.dom.nodes:
    if 'src' in a and a['src'].startswith('/'):self.assertTrue((ROOT/a['src'][1:]).is_file(),a['src'])
    if t=='a' and a.get('target')=='_blank':self.assertIn('noopener',a.get('rel',''))
@@ -37,8 +37,12 @@ class CatalogContract(unittest.TestCase):
    self.assertTrue(item['photo'].startswith('https://pjewtzlrqtomilpivjai.supabase.co/storage/v1/object/public/'))
  def test_truthful_offer_and_scope(self):
   text=html.unescape(re.sub('<[^>]+>',' ',self.page))
-  for required in ['+50','experiências','27 benefícios','20','R$ 97','R$ 0,99','R$ 97,99','Renovação anual','09/11/2026','por estabelecimento, não por prato','todo o cardápio']:self.assertIn(required,text)
+  for required in ['+50','experiências','27 benefícios','BLACK FRIDAY +UM','1 ano inteiro','R$ 47,99','primeiro ano','taxa incluída','Renovação anual','por estabelecimento, não por prato','todo o cardápio']:self.assertIn(required,text)
   self.assertNotIn('27 experiências',text)
+  self.assertNotIn('Catálogo revisado em',text)
+  self.assertNotIn('20 parceiros',text)
+  self.assertIn('experiências disponíveis',text)
+  self.assertIn('atualmente',text)
   self.assertNotIn('data-filter="beleza"',self.page);self.assertNotIn('data-filter="pet"',self.page)
   self.assertIn('noindex,nofollow',self.page)
  def test_accessibility_and_nojs_structure(self):

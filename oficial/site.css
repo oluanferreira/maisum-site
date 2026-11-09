@@ -37,17 +37,70 @@
 @media(max-width:850px){.hero-art.hero-art-composition{width:min(100%,480px);max-width:480px;margin-top:8px}}
 @media(max-width:600px){.hero-art.hero-art-composition{width:100%;max-width:370px;margin-top:11px}.hero-art-composition figcaption{font-size:9px;margin-top:7px}.hero-art-composition .composition-halo{inset:7% 0 9%}}
 
-/* Mobile hero leads with the complete composition immediately after the title.
-   Display-contents lets the existing semantic copy participate in the grid;
-   all copy, prices and actions remain in the document, with no duplicate image. */
-@media(max-width:600px){
- .hero{grid-template-columns:minmax(0,1fr);gap:0;align-items:start}
- .hero-copy{display:contents}
- .hero-copy>.eyebrow{grid-column:1;grid-row:1}
- .hero-copy>h1{grid-column:1;grid-row:2}
- .hero>.hero-art.hero-art-composition{grid-column:1;grid-row:3;margin-top:20px;margin-bottom:0;align-self:start}
- .hero-copy>.hero-description{grid-column:1;grid-row:4;margin-top:24px}
- .hero-copy>.hero-actions{grid-column:1;grid-row:5}
- .hero-copy>.hero-price{grid-column:1;grid-row:6}
- .hero-copy>.hero-facts{grid-column:1;grid-row:7;width:100%;margin-bottom:8px}
+/* Approved artwork stays byte-for-byte unchanged. The CSS mask softens only
+   the lower edge into the cream background; face, hat and torso remain opaque. */
+.hero-title-line{display:block}
+.hero-art-composition .hero-composition{
+ -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 85%,#000e6 90%,#0008c 96%,transparent 100%);
+ mask-image:linear-gradient(to bottom,#000 0%,#000 85%,#000e6 90%,#0008c 96%,transparent 100%)
 }
+/* Optional independent food cutouts sit along the lower artwork edge.
+   Empty by default, with no placeholders, added whitespace or broken requests. */
+.hero-food-extras{position:absolute;left:-4%;right:-2%;bottom:5%;z-index:2;display:flex;align-items:flex-end;justify-content:space-between;gap:12px;pointer-events:none}
+.hero-food-extras:empty{display:none}
+.hero-food-extras>img{display:block;width:29%;height:auto;object-fit:contain;filter:drop-shadow(0 8px 10px #50311314)}
+.hero-food-extras>img:only-child{width:47%;-webkit-mask-image:linear-gradient(to bottom,#000 87%,transparent 100%);mask-image:linear-gradient(to bottom,#000 87%,transparent 100%)}
+.hero-food-extras>.hero-food-panorama:only-child{width:100%}
+
+/* On compact screens, keep the campaign as a true left/right composition.
+   The title has its own column; the whole approved image has another. Details
+   and actions span the page below, never compete with Léo's face or the food. */
+@media(max-width:850px){
+ .hero{grid-template-columns:minmax(0,.42fr) minmax(0,.58fr);gap:0 20px;align-items:center;min-height:0}
+ .hero-copy{display:contents}
+ .hero-copy>.eyebrow{grid-column:1/-1;grid-row:1;margin-bottom:22px}
+ .hero-copy>h1{grid-column:1;grid-row:2;font-size:clamp(38px,12vw,78px);line-height:.94;align-self:center;position:relative;z-index:3;letter-spacing:-.065em}
+ .hero-title-line>span,.hero-title-line>em{display:block}
+ .hero-title-line+ .hero-title-line{margin-top:.1em}
+ .hero>.hero-art.hero-art-composition{grid-column:2;grid-row:2;width:100%;max-width:none;margin:0;align-self:center;justify-self:end}
+ .hero-art-composition figcaption{font-size:9px;line-height:1.5;margin-top:4px}
+ .hero-copy>.hero-description{grid-column:1/-1;grid-row:3;margin-top:24px;max-width:470px}
+ .hero-copy>.hero-actions{grid-column:1/-1;grid-row:4}
+ .hero-copy>.hero-price{grid-column:1/-1;grid-row:5}
+ .hero-copy>.hero-facts{grid-column:1/-1;grid-row:6;width:100%;margin-bottom:8px}
+ .hero-food-extras{left:0;right:0;bottom:8%}
+ .hero-food-extras>img:only-child{width:60%}
+}
+@media(max-width:600px){
+ .hero{gap:0 10px;padding-top:21px}
+ .hero-copy>.eyebrow{margin-bottom:21px}
+ .hero-copy>h1{font-size:clamp(38px,12vw,65px)}
+ .hero-art-composition figcaption{font-size:7px;letter-spacing:0}
+ .hero-copy>.hero-description{margin-top:23px;max-width:360px}
+}
+
+/* The last call to action completes the same annual purchase journey. */
+.closing-action{flex:none}
+.closing-action>p{font-size:11px;line-height:1.6;margin-top:10px;color:#49240f}
+@media(max-width:600px){.hero-price{font-size:11px}.mobile-buy>div>span{font-size:9px}.closing-action{width:100%;max-width:350px}.closing-action>.button{width:100%}.closing-action>p{font-size:10px}.offer-terms{font-size:11px}}
+
+/* Readable orange-section labels and mobile-friendly secondary actions. */
+.closing .eyebrow,.closing-action>p{color:#3e200f}
+.hero-actions>.button-plain,.text-link{min-height:44px}
+
+/* Black Friday: one clearly scoped first-year price, no artificial deadline. */
+.black-friday-label{display:inline-block;margin-bottom:7px;padding:4px 9px;background:#191a18;color:#faf7f2;border-radius:5px;font-size:10px;font-weight:750;letter-spacing:.7px;text-transform:uppercase}
+.hero-price>.black-friday-label{display:table}
+.black-friday-offer{background:#191a18;border-color:#383a34;color:#faf7f2;box-shadow:0 15px 0 -7px var(--paper),0 16px 0 -6px #b8b3a9}
+.black-friday-offer .offer-topline,.black-friday-offer .offer-bottomline{border-color:#65675d;color:#deddd6}
+.black-friday-offer .offer-topline>span:first-child{color:#ffb77f}
+.black-friday-offer .offer-symbol{color:#34372f}
+.black-friday-offer h3 em{color:#ffb77f}
+.black-friday-offer .offer-intro{position:relative;font-size:12px;line-height:1.7;color:#d4d3ca;margin-top:16px}
+.black-friday-offer .offer-price small{color:#dddcd3;font-size:11px;white-space:nowrap}
+.black-friday-offer .offer-total,.black-friday-offer .offer-total strong{color:#f3f0e9}
+.black-friday-offer .offer-terms{color:#d4d3ca;font-size:11px}
+.black-friday-offer>.button{background:#ffb77f;color:#24231f}
+.black-friday-offer>.button:hover{background:#ffcb9d}
+@media(max-width:600px){.black-friday-buy{background:#191a18f7;color:#faf7f2;border-color:#3a3c34}.black-friday-buy>div{flex:1}.black-friday-buy>div>span,.black-friday-buy>div>small{color:#deddd6}.black-friday-buy>div>small{display:block;font-size:8px;line-height:1.45;margin-top:3px;max-width:155px}.black-friday-buy>a{background:#ffb77f;color:#24231f;flex:none;font-size:10px;padding-inline:14px;gap:10px}.black-friday-offer .offer-price>strong{font-size:92px}.black-friday-offer .offer-price>span{font-size:20px}.black-friday-offer .offer-price small{font-size:10px}.site-footer{padding-bottom:140px}}
+@media(max-width:355px){.black-friday-offer .offer-price>strong{font-size:84px}.black-friday-offer .offer-price>span{font-size:18px}.black-friday-offer .offer-price small{font-size:9px}.black-friday-buy>a{padding-inline:12px}.black-friday-buy>div>span{font-size:8px}}

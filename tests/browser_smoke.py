@@ -19,6 +19,10 @@ with sync_playwright() as p:
   assert page.evaluate("async()=>{const i=new Image();i.src='/links/assets/brand-3d.png';await i.decode();return i.naturalWidth>0}"), '3D artwork not loaded'
   assert page.locator('[data-link]').count()==6
   assert page.locator('.accounts').count()==0
+  assert page.locator('.passport.black-friday').count()==1
+  assert page.locator('[data-link="passport"]').get_attribute('href')=='https://pay.cakto.com.br/3e7t64x_1061003?coupon=blackmaisum'
+  assert 'R$ 47,99' in page.locator('.passport').inner_text()
+  assert 'no primeiro ano' in page.locator('.passport').inner_text()
   assert page.locator('[data-link="app"], [data-link="partner-login"]').count()==0
   assert page.locator('[data-link="consumer"]').bounding_box()['height']>=60
   if width<=390 and height>=700:

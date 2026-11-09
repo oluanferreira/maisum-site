@@ -1,0 +1,15 @@
+const fs = require('node:fs');
+const path = require('node:path');
+const source = process.argv[2] || '.';
+const out = process.argv[3] || 'biosite-public';
+const copy = (name) => { const dest = path.join(out, name); fs.mkdirSync(path.dirname(dest), {recursive:true}); fs.copyFileSync(path.join(source,name), dest); };
+fs.mkdirSync(out, {recursive:true});
+for (const name of ['links/central.css','links/central.js','links/assets/brand-3d.png','links/assets/discover-3d.png','links/assets/black-friday-3d.webp','links/fonts/dm-sans.woff2','links/fonts/cormorant-italic.woff2','links/fonts/dmsans-OFL.txt','links/fonts/cormorantgaramond-OFL.txt','oficial/assets/leo-gastronomia-v2.webp','oficial/assets/food-table.webp','favicon.svg','experiencias/catalogo.css','experiencias/catalogo.js']) copy(name);
+const adapt = (text) => text.replaceAll('content="noindex,nofollow"','content="index,follow"').replaceAll('https://appmaisum.com.br/links','https://bio.appmaisum.com.br/').replaceAll('https://appmaisum.com.br/experiencias','https://bio.appmaisum.com.br/experiencias').replaceAll('href="/links"','href="/"').replaceAll('aria-label="+UM, site oficial"','aria-label="+UM, central de links"');
+const home = adapt(fs.readFileSync(path.join(source,'links/index.html'),'utf8'));
+fs.writeFileSync(path.join(out,'index.html'),home);
+fs.writeFileSync(path.join(out,'links/index.html'),home);
+fs.writeFileSync(path.join(out,'experiencias/index.html'),adapt(fs.readFileSync(path.join(source,'experiencias/index.html'),'utf8')));
+fs.writeFileSync(path.join(out,'robots.txt'),'User-agent: *\nAllow: /\nSitemap: https://bio.appmaisum.com.br/sitemap.xml\n');
+fs.writeFileSync(path.join(out,'sitemap.xml'),'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://bio.appmaisum.com.br/</loc></url><url><loc>https://bio.appmaisum.com.br/experiencias</loc></url></urlset>\n');
+console.log('Built isolated approved biosite and catalog in '+out);

@@ -4,3 +4,5 @@
 @media(max-width:350px){h1{font-size:36px}.intro-stamp{display:none}.location{max-width:140px;text-align:right}.help-grid{grid-template-columns:1fr}.help-card .card-copy>.help-action{padding-top:5px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.link-card{transition:none}.link-card:hover{transform:none}}
 @media(forced-colors:active){.link-card,.card-icon{border:1px solid ButtonText}.card-copy>span,.card-copy>strong{color:LinkText}}
+
+.external-arrow{display:inline-block;width:1em;height:1em;flex:none;vertical-align:-.12em}

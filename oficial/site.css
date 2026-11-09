@@ -41,8 +41,8 @@
    the lower edge into the cream background; face, hat and torso remain opaque. */
 .hero-title-line{display:block}
 .hero-art-composition .hero-composition{
- -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 85%,#000e6 90%,#0008c 96%,transparent 100%);
- mask-image:linear-gradient(to bottom,#000 0%,#000 85%,#000e6 90%,#0008c 96%,transparent 100%)
+ -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 85%,#000000e6 90%,#0000008c 96%,transparent 100%);
+ mask-image:linear-gradient(to bottom,#000 0%,#000 85%,#000000e6 90%,#0000008c 96%,transparent 100%)
 }
 /* Optional independent food cutouts sit along the lower artwork edge.
    Empty by default, with no placeholders, added whitespace or broken requests. */

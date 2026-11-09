@@ -18,6 +18,7 @@ with sync_playwright() as p:
   assert not errors,errors
   assert page.evaluate("async()=>{const i=new Image();i.src='/links/assets/brand-3d.png';await i.decode();return i.naturalWidth>0}"), '3D artwork not loaded'
   assert page.locator('[data-link]').count()==6
+  assert page.locator('.hero-host').bounding_box()['y']>=page.locator('.leo-intro').bounding_box()['y']+page.locator('.leo-intro').bounding_box()['height'], 'Léo caption overlaps artwork'
   assert page.locator('.accounts').count()==0
   assert page.locator('.passport.black-friday').count()==1
   assert page.locator('[data-link="passport"]').get_attribute('href')=='https://pay.cakto.com.br/3e7t64x_1061003?coupon=blackmaisum'

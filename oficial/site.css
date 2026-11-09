@@ -180,3 +180,6 @@
 .hero-art-composition .hero-food-table>img:only-child{width:100%;height:auto;object-fit:contain;filter:drop-shadow(0 7px 9px #50311312);-webkit-mask-image:linear-gradient(to bottom,#000 86%,transparent 100%);mask-image:linear-gradient(to bottom,#000 86%,transparent 100%)}
 @media(max-width:850px){.hero-art.hero-art-composition{--hero-caption-height:0px}}
 @media(max-width:600px){.hero-art.hero-art-composition{--hero-caption-height:0px}}
+
+/* Remove the old utensil below the intact right elbow; the new table supplies it. */
+.hero-art-composition .hero-composition{clip-path:polygon(0 0,100% 0,100% 67%,84% 67%,84% 100%,0 100%)}

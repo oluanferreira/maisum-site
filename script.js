@@ -1,18 +1,3 @@
-// Forward an explicit campaign affiliate only; organic visits stay unassigned.
-// Do not persist attribution locally or replace Cakto's attribution rules.
-(() => {
-  const affiliates = new URLSearchParams(window.location.search).getAll('affiliate');
-  if (affiliates.length !== 1 || !/^[A-Za-z0-9_-]{1,128}$/.test(affiliates[0])) return;
-
-  document.querySelectorAll('a[href]').forEach((link) => {
-    const checkout = new URL(link.href, window.location.href);
-    if (checkout.origin !== 'https://pay.cakto.com.br' ||
-        checkout.pathname !== '/3e7t64x_1061003') return;
-    checkout.searchParams.set('affiliate', affiliates[0]);
-    link.href = checkout.toString();
-  });
-})();
-
 const menuButton = document.querySelector('.menu-button');
 const mobileMenu = document.querySelector('.mobile-menu');
 

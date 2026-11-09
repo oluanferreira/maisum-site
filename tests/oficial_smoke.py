@@ -23,7 +23,11 @@ with sync_playwright() as p:
   assert page.evaluate("document.fonts.check('650 30px DM')"),'font'
   assert not errors,errors
   assert page.locator('h1').count()==1
-  assert page.locator('.leo-portrait').count()==1
+  assert page.locator('.hero-art img').count()==1
+  assert page.locator('.hero-composition').count()==1
+  assert page.locator('.hero-art .food-float, .hero-art .portrait-frame').count()==0
+  assert page.locator('.hero-composition').evaluate('(img)=>getComputedStyle(img).objectFit==="contain"')
+  assert page.locator('.hero-composition').get_attribute('src')=='/oficial/assets/leo-gastronomia-v2.png'
   assert page.locator('.hero-facts').inner_text().find('+50 experiências')>=0
   assert page.locator('[data-checkout]').evaluate_all("els=>els.every(a=>a.href==='https://pay.cakto.com.br/3e7t64x_1061003')")
   assert page.locator('img:not([loading="lazy"])').evaluate_all('(images)=>images.every(i=>i.complete && i.naturalWidth>0)'), 'missing hero image'

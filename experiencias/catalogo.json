@@ -2,8 +2,8 @@
   "updated_at": "2026-11-09T18:07:48.432Z",
   "city": "Vitória da Conquista",
   "state": "BA",
-  "benefit_count": 32,
-  "partner_count": 22,
+  "benefit_count": 27,
+  "partner_count": 20,
   "items": [
     {
       "id": "6e49ae8e-4f9e-4940-928a-10a535f31f05",
@@ -195,23 +195,6 @@
       "app_url": "https://app.appmaisum.com.br/share/dishes/bdbf719a-cfd7-4f36-8ccb-97b8eb973d21"
     },
     {
-      "id": "c5c6c466-954b-4271-97cd-13c0077d8f9f",
-      "partner": "Cão primitivo",
-      "name": "Creche canina",
-      "category": "pet",
-      "category_label": "Pets",
-      "description": "Um dia de diversão para o seu amigo.",
-      "price_cents": 7000,
-      "price_label": "R$ 70,00",
-      "photo": "https://pjewtzlrqtomilpivjai.supabase.co/storage/v1/object/public/restaurant-photos/benefits/c5c6c466-954b-4271-97cd-13c0077d8f9f/1785187510649.jpg",
-      "address": "Rua Carioca, 246, Casa, Centro, Vitória da Conquista - BA, CEP 45000020",
-      "rules": [
-        "Seg, Ter, Qua, Qui, Sex · 07:30 às 17:00"
-      ],
-      "reuse_days": 365,
-      "app_url": "https://app.appmaisum.com.br/share/dishes/c5c6c466-954b-4271-97cd-13c0077d8f9f"
-    },
-    {
       "id": "5d44248b-aa5a-40a1-a01e-38da8bd31c94",
       "partner": "Empório D'Anjos",
       "name": "Todos os Vinhos",
@@ -262,74 +245,6 @@
       ],
       "reuse_days": 180,
       "app_url": "https://app.appmaisum.com.br/share/dishes/1b0a8db7-4bfd-42f1-ae44-d666f1d7e05d"
-    },
-    {
-      "id": "079d0842-7992-4baf-a67b-6905ef47dd39",
-      "partner": "Mens club barbearia",
-      "name": "Barba",
-      "category": "beleza",
-      "category_label": "Beleza e cuidados",
-      "description": "Benefício 2 por 1. Confira as opções elegíveis e as condições na plataforma +UM.",
-      "price_cents": 2500,
-      "price_label": "R$ 25,00",
-      "photo": "https://pjewtzlrqtomilpivjai.supabase.co/storage/v1/object/public/dishes-photos/a24e5782-d8fe-4e4e-b4c6-1e3211394bba/079d0842-7992-4baf-a67b-6905ef47dd39-1783450195684.jpeg",
-      "address": "R. Pedro Bittencourt Ferraz,305, 305, Felicia, Vitória da Conquista - BA, CEP 45055395",
-      "rules": [
-        "Seg, Ter, Qua, Qui · 09:00 às 20:00"
-      ],
-      "reuse_days": 365,
-      "app_url": "https://app.appmaisum.com.br/share/dishes/079d0842-7992-4baf-a67b-6905ef47dd39"
-    },
-    {
-      "id": "3d8d176b-01a5-4c41-8ea2-3d3bfaa5b05a",
-      "partner": "Mens club barbearia",
-      "name": "Corte Cabelo",
-      "category": "beleza",
-      "category_label": "Beleza e cuidados",
-      "description": "Benefício 2 por 1. Confira as opções elegíveis e as condições na plataforma +UM.",
-      "price_cents": 4000,
-      "price_label": "R$ 40,00",
-      "photo": "https://pjewtzlrqtomilpivjai.supabase.co/storage/v1/object/public/dishes-photos/a24e5782-d8fe-4e4e-b4c6-1e3211394bba/3d8d176b-01a5-4c41-8ea2-3d3bfaa5b05a-1783449903076.jpeg",
-      "address": "R. Pedro Bittencourt Ferraz,305, 305, Felicia, Vitória da Conquista - BA, CEP 45055395",
-      "rules": [
-        "Seg, Ter, Qua, Qui · 09:00 às 20:00"
-      ],
-      "reuse_days": 365,
-      "app_url": "https://app.appmaisum.com.br/share/dishes/3d8d176b-01a5-4c41-8ea2-3d3bfaa5b05a"
-    },
-    {
-      "id": "e609c674-2aeb-44cf-82ff-2bef3bd7c048",
-      "partner": "Mens club barbearia",
-      "name": "Corte Cabelo + Barba",
-      "category": "beleza",
-      "category_label": "Beleza e cuidados",
-      "description": "Benefício 2 por 1. Confira as opções elegíveis e as condições na plataforma +UM.",
-      "price_cents": 5500,
-      "price_label": "R$ 55,00",
-      "photo": "https://pjewtzlrqtomilpivjai.supabase.co/storage/v1/object/public/dishes-photos/a24e5782-d8fe-4e4e-b4c6-1e3211394bba/e609c674-2aeb-44cf-82ff-2bef3bd7c048-1783450546063.jpeg",
-      "address": "R. Pedro Bittencourt Ferraz,305, 305, Felicia, Vitória da Conquista - BA, CEP 45055395",
-      "rules": [
-        "Seg, Ter, Qua, Qui · 09:00 às 20:00"
-      ],
-      "reuse_days": 365,
-      "app_url": "https://app.appmaisum.com.br/share/dishes/e609c674-2aeb-44cf-82ff-2bef3bd7c048"
-    },
-    {
-      "id": "5dd5ea6a-44eb-45ed-8b90-d6fc52e868ff",
-      "partner": "Mens club barbearia",
-      "name": "Corte Cabelo + Barba + Sobrancelha",
-      "category": "beleza",
-      "category_label": "Beleza e cuidados",
-      "description": "Benefício 2 por 1. Confira as opções elegíveis e as condições na plataforma +UM.",
-      "price_cents": 6000,
-      "price_label": "R$ 60,00",
-      "photo": "https://pjewtzlrqtomilpivjai.supabase.co/storage/v1/object/public/dishes-photos/a24e5782-d8fe-4e4e-b4c6-1e3211394bba/5dd5ea6a-44eb-45ed-8b90-d6fc52e868ff-1783450601074.jpeg",
-      "address": "R. Pedro Bittencourt Ferraz,305, 305, Felicia, Vitória da Conquista - BA, CEP 45055395",
-      "rules": [
-        "Seg, Ter, Qua, Qui · 09:00 às 20:00"
-      ],
-      "reuse_days": 365,
-      "app_url": "https://app.appmaisum.com.br/share/dishes/5dd5ea6a-44eb-45ed-8b90-d6fc52e868ff"
     },
     {
       "id": "2ea62989-738e-40e2-91bc-5ee633b99ca1",
@@ -556,5 +471,6 @@
       "reuse_days": 90,
       "app_url": "https://app.appmaisum.com.br/share/dishes/e2baed41-eb85-4dc1-88cc-f8a02452cd91"
     }
-  ]
+  ],
+  "scope": "Benefícios gastronômicos; o passaporte também inclui benefícios em outros setores."
 }

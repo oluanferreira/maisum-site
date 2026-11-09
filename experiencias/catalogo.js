@@ -23,7 +23,7 @@
       if (visible) total++;
     });
     filters.forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.filter === category)));
-    count.textContent = `${total} ${total === 1 ? 'benefício para explorar' : 'benefícios para explorar'}`;
+    count.textContent = `${total} ${total === 1 ? 'benefício gastronômico para explorar' : 'benefícios gastronômicos para explorar'}`;
     empty.hidden = total > 0;
     reset.hidden = !query && category === 'todas';
     if (updateURL) {

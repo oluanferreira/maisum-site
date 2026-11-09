@@ -19,12 +19,11 @@ with sync_playwright() as p:
   page.goto(BASE,wait_until='networkidle');page.evaluate('document.fonts.ready')
   assert page.evaluate('document.documentElement.scrollWidth<=innerWidth'),(width,'overflow')
   assert page.evaluate("document.fonts.check('650 30px DM')"),'font'
-  assert visible_count(page)==32
+  assert visible_count(page)==27
   assert page.locator('#catalog-controls').is_visible()
-  for category,count in [('comida',27),('beleza',4),('pet',1),('todas',32)]:
-   page.locator(f'[data-filter="{category}"]').click();assert visible_count(page)==count
-   expect(page.locator(f'[data-filter="{category}"]')).to_have_attribute('aria-pressed','true')
-   assert page.locator('#results-count').inner_text().startswith(str(count)+' ')
+  assert page.locator('.experience-card:not([data-category="comida"])').count()==0
+  assert page.locator('[data-filter="beleza"], [data-filter="pet"]').count()==0
+  assert page.locator('#results-count').inner_text().startswith('27 ')
   # All visible images must either decode or show the explicit fallback, never an unhandled broken asset.
   for img in page.locator('.card-photo img').all():
    img.scroll_into_view_if_needed()
@@ -33,19 +32,19 @@ with sync_playwright() as p:
   assert all(i['loaded'] or i['fallback'] for i in images),images
   broken.extend(i['src'] for i in images if not i['loaded'])
   assert page.evaluate('document.documentElement.scrollWidth<=innerWidth')
-  page.evaluate('window.scrollTo(0,0)');page.screenshot(path=str(OUT/f'catalogo-{width}x{height}.png'),full_page=True)
+  page.evaluate('window.scrollTo(0,0)');page.screenshot(path=str(OUT/f'catalogo-{width}x{height}.jpg'),full_page=True,quality=88)
   if width==390:page.screenshot(path=str(OUT/'catalogo-mobile-first-screen.png'))
   assert not errors,errors
-  results.append({'width':width,'height':height,'no_overflow':True,'js_errors':errors,'images_loaded':sum(i['loaded'] for i in images),'fallback_images':sum(i['fallback'] for i in images),'filters_pass':True});page.close()
+  results.append({'width':width,'height':height,'no_overflow':True,'js_errors':errors,'images_loaded':sum(i['loaded'] for i in images),'fallback_images':sum(i['fallback'] for i in images),'gastronomy_only':True});page.close()
  page=context.new_page();page.set_viewport_size({'width':390,'height':844});page.goto(BASE,wait_until='networkidle')
  search=page.locator('#catalog-search');search.fill('acai');accent_count=visible_count(page);assert accent_count>0
  search.fill('açaí');assert visible_count(page)==accent_count
  search.fill('TATI');assert visible_count(page)==1
  search.fill('zzzz-sem-resultado-qa');assert visible_count(page)==0;assert page.locator('#empty-state').is_visible()
- page.locator('#empty-reset').click();assert visible_count(page)==32;assert search.input_value()==''
- page.locator('[data-filter="beleza"]').click();page.locator('#reset-filters').click();assert visible_count(page)==32
+ page.locator('#empty-reset').click();assert visible_count(page)==27;assert search.input_value()==''
+ search.fill('tati');page.locator('#reset-filters').click();assert visible_count(page)==27
  # Supported query state restores search/category without another click.
- page.goto(BASE+'?categoria=pet',wait_until='networkidle');assert visible_count(page)==1
+ page.goto(BASE+'?busca=acai',wait_until='networkidle');assert visible_count(page)==accent_count
  selected=next(x['id'] for x in DATA['items'] if x['name']=='Tati Burguer');anchor='#experiencia-'+selected
  page.goto(BASE+'?experiencia='+selected+anchor,wait_until='networkidle')
  expect(page.locator(anchor+' details')).to_have_attribute('open','');assert page.locator(anchor).evaluate('e=>e.classList.contains("highlighted")')
@@ -71,10 +70,10 @@ with sync_playwright() as p:
  fallback.screenshot(path=str(OUT/'catalogo-image-fallback.png'));fallback.close()
  # Native details and complete content remain usable without JavaScript.
  nojs=browser.new_context(java_script_enabled=False,viewport={'width':390,'height':844})
- np=nojs.new_page();np.goto(BASE,wait_until='networkidle');assert np.locator('.experience-card').count()==32;assert not np.locator('#catalog-controls').is_visible()
+ np=nojs.new_page();np.goto(BASE,wait_until='networkidle');assert np.locator('.experience-card').count()==27;assert not np.locator('#catalog-controls').is_visible()
  np.locator('.experience-card').first.locator('summary').click();assert np.locator('.experience-card').first.locator('details').get_attribute('open') is not None
  assert np.locator('[data-checkout]').first.get_attribute('href')=='https://pay.cakto.com.br/3e7t64x_1061003'
  np.screenshot(path=str(OUT/'catalogo-nojs.png'))
  browser.close()
 server.shutdown();(OUT/'results.json').write_text(json.dumps({'responsive':results,'accent_search':True,'empty_reset':True,'query_state':True,'deep_link':True,'affiliate_exact_checkout':True,'checkout_intercepted_no_purchase':True,'simulated_image_fallback':True,'no_js':True,'image_urls_using_fallback':sorted(set(broken))},indent=2))
-print('PASS: catalog responsive, filters 27/4/1, accent/empty/reset search, deep link, attribution, intercepted checkout, images/fallback and no-JS.')
+print('PASS: catalog responsive, 27 gastronomy benefits, accent/empty/reset search, deep link, attribution, intercepted checkout, images/fallback and no-JS.')

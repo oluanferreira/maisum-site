@@ -27,6 +27,10 @@ class CentralTests(unittest.TestCase):
  def test_account_block_removed(self):
   for removed in ['Já faço parte','ACESSE SUA CONTA','Minha conta +UM','Painel do parceiro','Sou assinante','Sou estabelecimento','https://app.appmaisum.com.br','https://restaurante.appmaisum.com.br/login']:
    self.assertNotIn(removed,self.source)
+ def test_contact_number_caption_removed(self):
+  self.assertNotIn('(77) 99957-1376',self.source)
+  self.assertNotIn('Fale com o +UM.',self.source)
+  self.assertNotIn('class="phone-number"',self.source)
  def test_distinct_whatsapp_messages(self):
   messages=[]
   for key,marker in [('influencer','influenciador'),('support-user','cliente'),('support-partner','lojista')]:

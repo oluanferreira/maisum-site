@@ -21,7 +21,7 @@ class CentralTests(unittest.TestCase):
   cls.source=(ROOT/'links/index.html').read_text();cls.doc=Document(cls.source)
   cls.links={a['data-link']:a for a in cls.doc.links if 'data-link' in a}
  def test_all_audiences_and_verified_destinations(self):
-  expected={'consumer':'/experiencias','passport':'https://pay.cakto.com.br/3e7t64x_1061003?coupon=blackmaisum','register':'https://restaurante.appmaisum.com.br/cadastro'}
+  expected={'app':'https://app.appmaisum.com.br/login','consumer':'/experiencias','passport':'https://pay.cakto.com.br/3e7t64x_1061003?coupon=blackmaisum','register':'https://restaurante.appmaisum.com.br/cadastro'}
   self.assertEqual(set(self.links),set(expected)|{'influencer','support-user','support-partner'})
   for key,url in expected.items():self.assertEqual(self.links[key]['href'],url)
  def test_black_friday_offer(self):
@@ -32,8 +32,12 @@ class CentralTests(unittest.TestCase):
   self.assertNotIn('Gastronomia em Conquista',self.source)
   self.assertNotIn('passport-terms',self.source)
  def test_account_block_removed(self):
-  for removed in ['Já faço parte','ACESSE SUA CONTA','Minha conta +UM','Painel do parceiro','Sou assinante','Sou estabelecimento','https://app.appmaisum.com.br','https://restaurante.appmaisum.com.br/login']:
+  for removed in ['Já faço parte','ACESSE SUA CONTA','Minha conta +UM','Painel do parceiro','Sou assinante','Sou estabelecimento','https://restaurante.appmaisum.com.br/login']:
    self.assertNotIn(removed,self.source)
+ def test_account_access_is_easy_to_find(self):
+  self.assertEqual(self.source.count('Acessar minha conta'),1)
+  self.assertIn('account-access',self.links['app']['class'])
+  self.assertLess(self.source.index('Acessar minha conta'),self.source.index('<h1>'))
  def test_contact_number_caption_removed(self):
   self.assertNotIn('(77) 99957-1376',self.source)
   self.assertNotIn('Fale com o +UM.',self.source)

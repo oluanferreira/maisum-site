@@ -182,4 +182,13 @@
 @media(max-width:600px){.hero-art.hero-art-composition{--hero-caption-height:0px}}
 
 /* Remove the old utensil below the intact right elbow; the new table supplies it. */
-.hero-art-composition .hero-composition{clip-path:polygon(0 0,100% 0,100% 67%,84% 67%,84% 100%,0 100%)}
+.hero-art-composition .hero-composition{clip-path:polygon(0 0,100% 0,100% 67%,84% 67%,84% 100%,67% 100%,67% 77%,63% 66%,60% 63%,44% 63%,40% 66%,37% 77%,37% 100%,0 100%)}
+
+/* Returning members have a visible account path on every screen.
+   On phones, purchase stays in the campaign card and fixed bottom action. */
+.header-account{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:44px;padding:10px 0;font-size:12px;font-weight:600;line-height:1.4;white-space:nowrap;flex:none;color:var(--ink)}
+.header-account svg{width:17px;height:17px;flex:none}
+.header-account:hover{text-decoration:underline;text-underline-offset:4px}
+@media(min-width:851px) and (max-width:1100px){.site-header{gap:18px}.desktop-nav{gap:15px}.header-account{font-size:11px}.header-buy{font-size:11px;padding-inline:15px;gap:16px}}
+@media(max-width:850px){.header-buy{display:none}.header-account{margin-left:auto;border:1px solid #d6cec2;border-radius:99px;padding:10px 13px;font-size:11px}}
+@media(max-width:355px){.header-account{font-size:10px;padding-inline:10px;gap:6px}.header-account svg{width:15px;height:15px}}

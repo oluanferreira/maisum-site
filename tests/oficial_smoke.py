@@ -24,6 +24,12 @@ with sync_playwright() as p:
   assert page.evaluate("document.fonts.check('650 30px DM')"),'font'
   assert not errors,errors
   assert page.locator('h1').count()==1
+  account=page.locator('.site-header .header-account')
+  assert account.is_visible(),'account access hidden'
+  assert account.inner_text().strip()=='Acessar minha conta'
+  assert account.get_attribute('href')=='https://app.appmaisum.com.br/login'
+  assert account.evaluate('(a)=>{const r=a.getBoundingClientRect();return r.height>=44 && r.top>=0 && r.right<=innerWidth && r.left>=0}'),'account target size or position'
+  assert page.locator('.faq-list a[href="https://app.appmaisum.com.br/login"]').count()==1
   assert 1<=page.locator('.hero-art img').count()<=3
   assert page.locator('.hero-food-extras').count()==1
   assert page.locator('.hero-food-extras img').count()==1
@@ -83,6 +89,15 @@ with sync_playwright() as p:
    href=link.get_attribute('href')
    assert (f'affiliate={expected}' in href) if expected else ('affiliate=' not in href),href
    if link.get_attribute('data-checkout') is not None:assert 'coupon=blackmaisum' in href,href
+ # Verify member navigation without requesting the real login service.
+ login_requests=[]
+ def login_intercept(route):
+  login_requests.append(route.request.url)
+  route.fulfill(status=200,content_type='text/html',body='<title>QA login interception</title>')
+ page.route('https://app.appmaisum.com.br/**',login_intercept)
+ page.goto('http://127.0.0.1:8132/?affiliate=creator_test',wait_until='networkidle')
+ page.locator('.header-account').click();page.wait_for_url('https://app.appmaisum.com.br/login')
+ assert login_requests==['https://app.appmaisum.com.br/login'],login_requests
  # Intercept the purchase destination before any checkout request is sent.
  checkout_requests=[]
  def checkout_intercept(route):
@@ -93,6 +108,6 @@ with sync_playwright() as p:
  page.locator('.hero-actions [data-checkout]').click();page.wait_for_url('https://pay.cakto.com.br/**')
  assert checkout_requests==['https://pay.cakto.com.br/3e7t64x_1061003?coupon=blackmaisum&affiliate=creator_test'],checkout_requests
  page.goto('http://127.0.0.1:8132/',wait_until='networkidle');page.keyboard.press('Tab');assert page.locator('.skip-link').evaluate('(e)=>e===document.activeElement')
- nojs=browser.new_context(java_script_enabled=False,viewport={'width':390,'height':844});np=nojs.new_page();np.goto('http://127.0.0.1:8132/',wait_until='networkidle');assert np.locator('.hero-actions [data-checkout]').is_visible();assert np.locator('.experience-card').count()==4;np.screenshot(path=str(OUT/'home-nojs.png'),full_page=True)
+ nojs=browser.new_context(java_script_enabled=False,viewport={'width':390,'height':844});np=nojs.new_page();np.goto('http://127.0.0.1:8132/',wait_until='networkidle');assert np.locator('.hero-actions [data-checkout]').is_visible();assert np.locator('.header-account').is_visible();assert np.locator('.experience-card').count()==4;np.screenshot(path=str(OUT/'home-nojs.png'),full_page=True)
  browser.close()
-server.shutdown();(OUT/'results.json').write_text(json.dumps({'responsive':results,'affiliate_organic_valid_duplicate_invalid':True,'no_js_content':True,'keyboard':True,'faq':True,'mobile_menu':True,'checkout_intercepted_without_payment':True},indent=2));print('PASS: six sizes, fonts, images, no overflow/JS errors, affiliate cases, no-JS, keyboard, FAQ, mobile menu.')
+server.shutdown();(OUT/'results.json').write_text(json.dumps({'responsive':results,'affiliate_organic_valid_duplicate_invalid':True,'no_js_content':True,'keyboard':True,'faq':True,'mobile_menu':True,'checkout_intercepted_without_payment':True,'account_visible_and_login_intercepted':True},indent=2));print('PASS: six sizes, fonts, images, no overflow/JS errors, affiliate cases, no-JS, keyboard, FAQ, mobile menu.')

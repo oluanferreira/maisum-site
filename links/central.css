@@ -46,5 +46,8 @@
 .leo-campaign .leo-main{-webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 85%,transparent 100%);mask-image:linear-gradient(to bottom,#000 0%,#000 85%,transparent 100%)}
 .leo-campaign .hero-table{position:absolute;display:block;z-index:2;width:120%;max-width:none;height:auto;left:-20%;bottom:0;object-fit:contain;-webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 87%,transparent 100%);mask-image:linear-gradient(to bottom,#000 0%,#000 87%,transparent 100%)}
 
-/* Clip only the old pizza utensil below the right elbow, behind the new table. */
-.leo-campaign .leo-main{clip-path:polygon(0 0,100% 0,100% 67%,84% 67%,84% 100%,0 100%)}
+/* Hide only the original burger and pizza utensil behind the new foreground. */
+.leo-campaign .leo-main{clip-path:polygon(0 0,100% 0,100% 67%,84% 67%,84% 100%,67% 100%,67% 77%,63% 66%,60% 63%,44% 63%,40% 66%,37% 77%,37% 100%,0 100%)}
+
+/* Returning members can reach their account immediately, without a separate block. */
+.account-access{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:44px;margin-left:auto;padding:10px 12px;border:1px solid #dbd4c8;border-radius:999px;background:#fffdf9;color:var(--ink);font-size:12px;font-weight:650;line-height:1.2;white-space:nowrap}.account-access svg{width:16px;height:18px;flex-shrink:0;stroke-width:1.6}.account-access:hover{background:#f3ece2;border-color:#b8aa96}@media(max-width:350px){.account-access{padding:10px;font-size:11px;gap:5px}.account-access svg{width:15px}}

@@ -29,7 +29,7 @@ class CentralTests(unittest.TestCase):
    self.assertNotIn(removed,self.source)
  def test_distinct_whatsapp_messages(self):
   messages=[]
-  for key,marker in [('influencer','influenciador'),('support-user','usuário'),('support-partner','lojista')]:
+  for key,marker in [('influencer','influenciador'),('support-user','cliente'),('support-partner','lojista')]:
    a=self.links[key];url=urlparse(a['href']);message=parse_qs(url.query)['text'][0]
    self.assertEqual(url.netloc,'wa.me');self.assertEqual(url.path,'/5577999571376');self.assertIn(marker,message)
    self.assertTrue({'noopener','noreferrer'} <= set(a['rel'].split()));self.assertEqual(a['target'],'_blank');messages.append(message)
@@ -43,8 +43,15 @@ class CentralTests(unittest.TestCase):
   self.assertIn('Cadastro sujeito à aprovação.',self.source);self.assertIn('condições combinadas antes da divulgação.',self.source)
   self.assertNotRegex(re.sub(r'<[^>]+>','',self.source),r'\d+%')
   self.assertEqual(self.source.count('<h1>'),1)
-  for title in ['Explorar<br>experiências','Cadastrar meu<br>estabelecimento','Parceria para<br>influenciadores','Preciso de suporte']:self.assertIn(title,self.source)
+  for title in ['Explorar<br>experiências','Cadastrar meu<br>estabelecimento','Parceria para<br>influenciadores','Como podemos ajudar?']:self.assertIn(title,self.source)
   self.assertIn('lang="pt-BR"',self.source);self.assertIn('name="viewport"',self.source)
+ def test_copy_uses_brand_promise_and_customer_language(self):
+  from urllib.parse import unquote
+  self.assertIn('<h1>Escolha um.<br>Ganhe <em>+um.</em></h1>',self.source)
+  self.assertIn('Sou cliente',self.source)
+  self.assertNotIn('usuário',unquote(self.source).lower())
+  self.assertNotIn('usuaria',unquote(self.source).lower())
+  self.assertNotIn('O que você',self.source)
  def test_homepage_and_sales_files_unchanged(self):
   expected={'index.html': 'c7034102f1658cbb569cec70dbbd6096ce75f0144d88aacd4ef25e8a8f333010', 'styles.css': '8d343d3d4ec53e22192dac92403dff2d3218ed368a22d902968a5fbde9be64a5', 'script.js': '2e52f57efc7daa958047142134f1a6e656f44415cb1e15db3cd3c3a1e1f63051', 'oferta/index.html': '5746b863cc85a8d405c833a2348d07e08a72283c964334fbb6b34c8b4dd5e816'}
   for path,digest in expected.items():self.assertEqual(hashlib.sha256((ROOT/path).read_bytes()).hexdigest(),digest,path)

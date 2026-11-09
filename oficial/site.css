@@ -41,8 +41,8 @@
    the lower edge into the cream background; face, hat and torso remain opaque. */
 .hero-title-line{display:block}
 .hero-art-composition .hero-composition{
- -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 85%,#000000e6 90%,#0000008c 96%,transparent 100%);
- mask-image:linear-gradient(to bottom,#000 0%,#000 85%,#000000e6 90%,#0000008c 96%,transparent 100%)
+ -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 59%,#000000d9 62%,transparent 66%,transparent 100%);
+ mask-image:linear-gradient(to bottom,#000 0%,#000 59%,#000000d9 62%,transparent 66%,transparent 100%)
 }
 /* Optional independent food cutouts sit along the lower artwork edge.
    Empty by default, with no placeholders, added whitespace or broken requests. */
@@ -172,3 +172,11 @@
 @media(max-width:1100px){.step-visual{height:220px}.step-body{padding:20px 18px}.how-section .steps h3{font-size:20px}.how-section .steps p{font-size:12px;min-height:84px}.step-kicker{font-size:7px}}
 @media(max-width:850px){.how-section .steps{grid-template-columns:1fr;gap:23px}.how-section .steps>li{display:grid;grid-template-columns:42% minmax(0,1fr)}.step-visual{height:100%;min-height:260px}.step-body{padding:27px}.how-section .steps p{min-height:0;font-size:13px}.how-section .steps h3{font-size:24px}.step-kicker{font-size:8px}.step-phone{transform:rotate(-8deg)}}
 @media(max-width:600px){.how-section .steps>li{display:block;border-radius:21px}.step-visual{height:215px;min-height:0}.step-body{padding:22px}.how-section .steps h3{font-size:23px}.how-section .steps p{font-size:13px;min-height:0;max-width:none}.how-section .steps a{margin-top:12px}.step-phone{height:239px;transform:translateY(19px) rotate(-8deg)}.step-kicker{font-size:8px}.step-visual-label{font-size:8px}}
+
+/* One coherent food foreground replaces the old dishes, while the original
+   Léo asset remains untouched. The plate layer covers the torso-mask seam. */
+.hero-art.hero-art-composition{--hero-caption-height:0px}
+.hero-art-composition .hero-food-table{left:-18%;right:auto;bottom:var(--hero-caption-height);width:118%;gap:0;z-index:2}
+.hero-art-composition .hero-food-table>img:only-child{width:100%;height:auto;object-fit:contain;filter:drop-shadow(0 7px 9px #50311312);-webkit-mask-image:linear-gradient(to bottom,#000 86%,transparent 100%);mask-image:linear-gradient(to bottom,#000 86%,transparent 100%)}
+@media(max-width:850px){.hero-art.hero-art-composition{--hero-caption-height:0px}}
+@media(max-width:600px){.hero-art.hero-art-composition{--hero-caption-height:0px}}

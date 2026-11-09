@@ -39,3 +39,9 @@
 .hero-desserts{width:130px;left:24px;bottom:0;filter:drop-shadow(0 3px 3px #4530191a)}
 @media(min-width:440px){.hero-desserts{width:157px;left:28px;bottom:0}}
 @media(max-width:350px){.hero-desserts{width:105px;left:18px;bottom:2px}}
+
+/* One shared food scene supplies the table, perspective and contact shadows.
+   The approved portrait pixels are unchanged; only its old food foreground is masked. */
+.leo-campaign{mask-image:none;-webkit-mask-image:none}
+.leo-campaign .leo-main{-webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 60%,transparent 65%);mask-image:linear-gradient(to bottom,#000 0%,#000 60%,transparent 65%)}
+.leo-campaign .hero-table{position:absolute;display:block;z-index:2;width:120%;max-width:none;height:auto;left:-20%;bottom:0;object-fit:contain;-webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 87%,transparent 100%);mask-image:linear-gradient(to bottom,#000 0%,#000 87%,transparent 100%)}

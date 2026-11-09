@@ -28,6 +28,9 @@ with sync_playwright() as p:
   assert page.locator('.hero-food-extras').count()==1
   assert page.locator('.hero-food-extras img').count()==1
   assert page.locator('.hero-food-extras img').get_attribute('alt')==''
+  assert page.locator('.hero-food-table img').get_attribute('src')=='/oficial/assets/food-table.webp'
+  assert page.locator('.hero-art img[src*="acai-sorvete"]').count()==0
+  assert page.locator('.hero-food-table img').evaluate('(img)=>getComputedStyle(img).objectFit==="contain"')
   assert page.locator('.hero-promo').count()==1
   assert page.locator('.hero-promo-top img').get_attribute('src')=='/links/assets/black-friday-3d.webp'
   assert page.locator('.hero-promo').evaluate('(el)=>getComputedStyle(el).backgroundColor==="rgb(25, 26, 24)"')
@@ -36,6 +39,7 @@ with sync_playwright() as p:
   assert page.locator('.step-company img').get_attribute('src')=='/oficial/assets/steps-companhia.webp'
   assert 'ilustrativo' in page.locator('.step-phone-scene').inner_text().lower()
   assert page.locator('.hero-composition').count()==1
+  assert page.locator('.hero-art figcaption').count()==0
   assert page.locator('.hero-art .food-float, .hero-art .portrait-frame').count()==0
   assert page.locator('.hero-composition').evaluate('(img)=>getComputedStyle(img).objectFit==="contain"')
   assert page.locator('.hero-composition').get_attribute('src')=='/oficial/assets/leo-gastronomia-v2.webp'

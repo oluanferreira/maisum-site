@@ -20,6 +20,8 @@ with sync_playwright() as p:
   assert page.locator('[data-link]').count()==6
   assert page.locator('.hero-host, .passport-terms').count()==0
   assert page.locator('.black-friday-art').count()==1
+  assert page.locator('.hero-desserts').count()==0
+  assert page.locator('.hero-table').get_attribute('src')=='/oficial/assets/food-table.webp'
   assert page.locator('.black-friday-art').evaluate('(img)=>img.complete && img.naturalWidth>0'), 'Black Friday artwork missing'
   assert page.locator('.accounts').count()==0
   assert page.locator('.passport.black-friday').count()==1

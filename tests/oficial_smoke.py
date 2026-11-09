@@ -11,7 +11,7 @@ results=[]
 assert hashlib.sha256((ROOT/'oficial/assets/leo-gastronomia-v2.png').read_bytes()).hexdigest()=='36e44a4a48a498cb1e4bf6da52aafd8fb2dd107c63639e7ffa07a5b014f71d08','approved Léo asset changed'
 with sync_playwright() as p:
  browser=p.chromium.launch(headless=True)
- for width,height in [(320,740),(390,844),(540,900),(768,1024),(1024,768),(1440,1000)]:
+ for width,height in [(320,740),(360,800),(390,844),(430,932),(540,900),(768,1024),(1024,768),(1440,1000)]:
   page=browser.new_page(viewport={'width':width,'height':height},reduced_motion='reduce')
   errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
   page.goto('http://127.0.0.1:8132/',wait_until='networkidle');page.evaluate('document.fonts.ready')
@@ -28,6 +28,12 @@ with sync_playwright() as p:
   assert account.is_visible(),'account access hidden'
   assert account.inner_text().strip()=='Acessar minha conta'
   assert account.get_attribute('href')=='https://app.appmaisum.com.br/login'
+  partner=page.locator('.site-header .header-partner')
+  assert partner.is_visible(),'partner portal hidden'
+  assert partner.get_attribute('href')=='https://restaurante.appmaisum.com.br/login'
+  assert 'Portal do parceiro' in partner.inner_text()
+  assert partner.evaluate('(a)=>{const r=a.getBoundingClientRect();return r.height>=44 && r.left>=0 && r.right<=innerWidth}'),'partner touch size or position'
+  assert page.locator('.header-partner').evaluate('(a)=>{const p=a.getBoundingClientRect(),c=document.querySelector(".header-account").getBoundingClientRect();return p.top>=c.bottom || p.right<=c.left || p.left>=c.right}'),'member/partner controls overlap'
   assert account.evaluate('(a)=>{const r=a.getBoundingClientRect();return r.height>=44 && r.top>=0 && r.right<=innerWidth && r.left>=0}'),'account target size or position'
   assert page.locator('.faq-list a[href="https://app.appmaisum.com.br/login"]').count()==1
   assert 1<=page.locator('.hero-art img').count()<=3
@@ -71,6 +77,7 @@ with sync_playwright() as p:
    image.scroll_into_view_if_needed(); image.evaluate('(img) => img.decode()')
   page.evaluate('window.scrollTo(0,0)')
   page.screenshot(path=str(OUT/f'home-{width}x{height}.png'),full_page=True)
+  if width in (320,360,390,430):page.screenshot(path=str(OUT/f'home-mobile-{width}-first-screen.png'))
   if width==390:page.screenshot(path=str(OUT/'home-mobile-first-screen.png'))
   if width==1440:page.screenshot(path=str(OUT/'home-desktop-first-screen.png'))
   if width in (390,1440):
@@ -98,6 +105,14 @@ with sync_playwright() as p:
  page.goto('http://127.0.0.1:8132/?affiliate=creator_test',wait_until='networkidle')
  page.locator('.header-account').click();page.wait_for_url('https://app.appmaisum.com.br/login')
  assert login_requests==['https://app.appmaisum.com.br/login'],login_requests
+ partner_requests=[]
+ def partner_intercept(route):
+  partner_requests.append(route.request.url)
+  route.fulfill(status=200,content_type='text/html',body='<title>QA partner login interception</title>')
+ page.route('https://restaurante.appmaisum.com.br/**',partner_intercept)
+ page.goto('http://127.0.0.1:8132/?affiliate=creator_test',wait_until='networkidle')
+ page.locator('.header-partner').click();page.wait_for_url('https://restaurante.appmaisum.com.br/login')
+ assert partner_requests==['https://restaurante.appmaisum.com.br/login'],partner_requests
  # Intercept the purchase destination before any checkout request is sent.
  checkout_requests=[]
  def checkout_intercept(route):
@@ -108,6 +123,6 @@ with sync_playwright() as p:
  page.locator('.hero-actions [data-checkout]').click();page.wait_for_url('https://pay.cakto.com.br/**')
  assert checkout_requests==['https://pay.cakto.com.br/3e7t64x_1061003?coupon=blackmaisum&affiliate=creator_test'],checkout_requests
  page.goto('http://127.0.0.1:8132/',wait_until='networkidle');page.keyboard.press('Tab');assert page.locator('.skip-link').evaluate('(e)=>e===document.activeElement')
- nojs=browser.new_context(java_script_enabled=False,viewport={'width':390,'height':844});np=nojs.new_page();np.goto('http://127.0.0.1:8132/',wait_until='networkidle');assert np.locator('.hero-actions [data-checkout]').is_visible();assert np.locator('.header-account').is_visible();assert np.locator('.experience-card').count()==4;np.screenshot(path=str(OUT/'home-nojs.png'),full_page=True)
+ nojs=browser.new_context(java_script_enabled=False,viewport={'width':390,'height':844});np=nojs.new_page();np.goto('http://127.0.0.1:8132/',wait_until='networkidle');assert np.locator('.hero-actions [data-checkout]').is_visible();assert np.locator('.header-account').is_visible();assert np.locator('.header-partner').is_visible();assert np.locator('.experience-card').count()==4;np.screenshot(path=str(OUT/'home-nojs.png'),full_page=True)
  browser.close()
-server.shutdown();(OUT/'results.json').write_text(json.dumps({'responsive':results,'affiliate_organic_valid_duplicate_invalid':True,'no_js_content':True,'keyboard':True,'faq':True,'mobile_menu':True,'checkout_intercepted_without_payment':True,'account_visible_and_login_intercepted':True},indent=2));print('PASS: six sizes, fonts, images, no overflow/JS errors, affiliate cases, no-JS, keyboard, FAQ, mobile menu.')
+server.shutdown();(OUT/'results.json').write_text(json.dumps({'responsive':results,'affiliate_organic_valid_duplicate_invalid':True,'no_js_content':True,'keyboard':True,'faq':True,'mobile_menu':True,'checkout_intercepted_without_payment':True,'account_visible_and_login_intercepted':True,'partner_portal_visible_and_intercepted':True},indent=2));print('PASS: eight sizes, fonts, images, no overflow/JS errors, affiliate cases, no-JS, keyboard, FAQ, mobile menu.')

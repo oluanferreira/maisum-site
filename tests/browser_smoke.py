@@ -9,7 +9,7 @@ threading.Thread(target=server.serve_forever,daemon=True).start()
 results=[]
 with sync_playwright() as p:
  browser=p.chromium.launch(headless=True)
- for width,height in [(320,740),(390,844),(390,400),(540,900),(768,1024),(1440,1000)]:
+ for width,height in [(320,740),(360,800),(390,844),(430,932),(390,400),(540,900),(768,1024),(1440,1000)]:
   page=browser.new_page(viewport={'width':width,'height':height},reduced_motion='reduce')
   errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
   page.goto('http://127.0.0.1:8124/links/',wait_until='networkidle');page.evaluate('document.fonts.ready')
@@ -24,6 +24,8 @@ with sync_playwright() as p:
   assert page.locator('.hero-table').get_attribute('src')=='/oficial/assets/food-table.webp'
   assert page.locator('.black-friday-art').evaluate('(img)=>img.complete && img.naturalWidth>0'), 'Black Friday artwork missing'
   assert page.locator('.accounts').count()==0
+  assert page.locator('.route-copy>p, .help-heading p:last-child').evaluate_all('(els)=>els.every(e=>parseFloat(getComputedStyle(e).fontSize)>=12)'), 'Small essential description'
+  assert page.locator('.hero-description').evaluate('(e)=>parseFloat(getComputedStyle(e).fontSize)>=11.5'), 'Small hero description'
   assert page.locator('.passport.black-friday').count()==1
   assert page.locator('[data-link="passport"]').get_attribute('href')=='https://pay.cakto.com.br/3e7t64x_1061003?coupon=blackmaisum'
   assert 'R$ 47,99' in page.locator('.passport').inner_text()
@@ -57,4 +59,4 @@ with sync_playwright() as p:
  page.goto('http://127.0.0.1:8124/links/?affiliate=test_creator');page.locator('[data-link="app"]').click();page.wait_for_url('https://app.appmaisum.com.br/login')
  nojs=browser.new_context(java_script_enabled=False,viewport={'width':390,'height':844});np=nojs.new_page();np.goto('http://127.0.0.1:8124/links/');assert np.locator('[data-link]').count()==7;np.screenshot(path=str(OUT/'central-nojs.png'),full_page=True)
  browser.close()
-server.shutdown();(OUT/'results.json').write_text(json.dumps({'responsive':results,'affiliate_roundtrip':True,'whatsapp_intercepted':3,'no_js':True,'keyboard':True,'account_login_intercepted':True},indent=2));print('PASS: 6 viewports, no overflow/errors, font, affiliate checkout, no-JS, keyboard, WhatsApp destinations.')
+server.shutdown();(OUT/'results.json').write_text(json.dumps({'responsive':results,'affiliate_roundtrip':True,'whatsapp_intercepted':3,'no_js':True,'keyboard':True,'account_login_intercepted':True},indent=2));print('PASS: 8 viewports, no overflow/errors, font, affiliate checkout, no-JS, keyboard, WhatsApp destinations.')

@@ -197,3 +197,26 @@
 @media(max-width:1100px){.hero-art-composition .hero-food-table{width:min(118%,calc(109% + 32px))}}
 @media(max-width:600px){.hero-art-composition .hero-food-table{width:min(118%,calc(109% + 20px))}}
 @media(max-width:355px){.hero-art-composition .hero-food-table{width:min(118%,calc(109% + 16px))}}
+
+/* Separate partner access from the member account without hiding either. */
+.site-header{height:126px;padding-bottom:28px}
+.header-partner{position:absolute;right:0;bottom:-6px;display:inline-flex;align-items:center;gap:7px;min-height:44px;font-size:11px;font-weight:550;line-height:1.4;color:var(--muted);white-space:nowrap}
+.header-partner>span{font-size:15px}
+.header-partner:hover{text-decoration:underline;text-underline-offset:4px;color:var(--ink)}
+@media(max-width:850px){.site-header{height:120px;padding-bottom:38px}.header-partner{bottom:0;font-size:10px}.mobile-nav{top:calc(100% - 2px)}}
+
+/* Keep phone-sized supporting copy readable without crowding the hero. */
+@media(max-width:600px){
+ .header-partner{font-size:11px}
+ .hero-description{font-size:13px}
+ .hero-facts>span{font-size:10px}
+ .hero-facts strong{font-size:11px}
+ .hero-promo-terms{font-size:10px}
+ .black-friday-buy>div>span{font-size:10px;line-height:1.4}
+ .black-friday-buy>div>small{font-size:9px;line-height:1.5}
+ .black-friday-offer .offer-price small{font-size:11px}
+ .faq-list summary{font-size:13px}
+ .faq-list details>p{font-size:13px}
+ .how-section .step-footnote{font-size:11px}
+}
+@media(max-width:355px){.header-account{font-size:11px}.hero-promo .hero-price>strong{font-size:32px}.hero-promo .hero-price>span{font-size:10px}}

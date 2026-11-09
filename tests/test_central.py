@@ -21,7 +21,7 @@ class CentralTests(unittest.TestCase):
   cls.source=(ROOT/'links/index.html').read_text();cls.doc=Document(cls.source)
   cls.links={a['data-link']:a for a in cls.doc.links if 'data-link' in a}
  def test_all_audiences_and_verified_destinations(self):
-  expected={'consumer':'/#experiencias','register':'https://restaurante.appmaisum.com.br/cadastro'}
+  expected={'consumer':'/experiencias','passport':'https://pay.cakto.com.br/3e7t64x_1061003','register':'https://restaurante.appmaisum.com.br/cadastro'}
   self.assertEqual(set(self.links),set(expected)|{'influencer','support-user','support-partner'})
   for key,url in expected.items():self.assertEqual(self.links[key]['href'],url)
  def test_account_block_removed(self):
@@ -56,7 +56,7 @@ class CentralTests(unittest.TestCase):
   self.assertNotIn('usuário',unquote(self.source).lower())
   self.assertNotIn('usuaria',unquote(self.source).lower())
   self.assertNotIn('O que você',self.source)
- def test_homepage_and_sales_files_unchanged(self):
-  expected={'index.html': 'c7034102f1658cbb569cec70dbbd6096ce75f0144d88aacd4ef25e8a8f333010', 'styles.css': '8d343d3d4ec53e22192dac92403dff2d3218ed368a22d902968a5fbde9be64a5', 'script.js': '2e52f57efc7daa958047142134f1a6e656f44415cb1e15db3cd3c3a1e1f63051', 'oferta/index.html': '5746b863cc85a8d405c833a2348d07e08a72283c964334fbb6b34c8b4dd5e816'}
+ def test_legacy_sales_files_unchanged(self):
+  expected={'styles.css': '8d343d3d4ec53e22192dac92403dff2d3218ed368a22d902968a5fbde9be64a5', 'script.js': '2e52f57efc7daa958047142134f1a6e656f44415cb1e15db3cd3c3a1e1f63051', 'oferta/index.html': '5746b863cc85a8d405c833a2348d07e08a72283c964334fbb6b34c8b4dd5e816'}
   for path,digest in expected.items():self.assertEqual(hashlib.sha256((ROOT/path).read_bytes()).hexdigest(),digest,path)
 if __name__=='__main__':unittest.main()

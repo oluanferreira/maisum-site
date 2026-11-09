@@ -1,0 +1,560 @@
+{
+  "updated_at": "2026-11-09T18:07:48.432Z",
+  "city": "Vitória da Conquista",
+  "state": "BA",
+  "benefit_count": 32,
+  "partner_count": 22,
+  "items": [
+    {
+      "id": "6e49ae8e-4f9e-4940-928a-10a535f31f05",
+      "partner": "Pizzaria Vitória",
+      "name": "Pizzas",
+      "category": "comida",
+      "category_label": "Comida e bebida",
+      "description": "Na compra de qualquer pizza do cardápio ganhe mais uma da mesma.",
+      "price_cents": null,
+      "price_label": "Consulte o valor",
+      "photo": "https://pjewtzlrqtomilpivjai.supabase.co/storage/v1/object/public/restaurant-photos/benefits/6e49ae8e-4f9e-4940-928a-10a535f31f05/1780359709584.jpg?v=1780359710784",
+      "address": "Avenida Frei Benjamim, 1906 Brasil",
+      "rules": [
+        "Seg · 11:00 às 23:59"
+      ],
+      "reuse_days": 365,
+      "app_url": "https://app.appmaisum.com.br/share/dishes/6e49ae8e-4f9e-4940-928a-10a535f31f05"
+    },
+    {
+      "id": "6113780f-29ed-461c-9e19-7c89277df45a",
+      "partner": "Canto da Tati - Restaurante & Pizzaria",
+      "name": "Tati Burguer",
+      "category": "comida",
+      "category_label": "Comida e bebida",
+      "description": "Compre um Tati Burguer: pão brioche, hambúrguer, queijo cheddar, alface, tomate, cebola e maionese especial e ganhe outro",
+      "price_cents": 3500,
+      "price_label": "R$ 35,00",
+      "photo": "https://pjewtzlrqtomilpivjai.supabase.co/storage/v1/object/public/restaurant-photos/benefits/6113780f-29ed-461c-9e19-7c89277df45a/1784844234285.png",
+      "address": "Avenida Brumado, 638, Brasil, Vitória da Conquista - BA, CEP 45051000",
+      "rules": [
+        "Ter, Qua, Qui, Sex · 18:00 às 22:00"
+      ],
+      "reuse_days": 365,
+      "app_url": "https://app.appmaisum.com.br/share/dishes/6113780f-29ed-461c-9e19-7c89277df45a"
+    },
+    {
+      "id": "2d104280-5b77-4dd2-9b2e-48a8042f5397",
+      "partner": "MP RANCH",
+      "name": "Picanha na Moita",
+      "category": "comida",
+      "category_label": "Comida e bebida",
+      "description": "Na compra de uma Picanha na Moita você ganha MaisUma. (Serve 03 pessoas)",
+      "price_cents": 15000,
+      "price_label": "R$ 150,00",
+      "photo": "https://pjewtzlrqtomilpivjai.supabase.co/storage/v1/object/public/dishes-photos/3bc4afc9-1309-4436-a8c0-1f533a476ec7/2d104280-5b77-4dd2-9b2e-48a8042f5397-1780512735288.jpg",
+      "address": "istrito Cabeceira da Jiboia - SN - Povoado do Capinal",
+      "rules": [
+        "Dom, Sáb · 11:00 às 23:00",
+        "Seg, Ter, Qua, Qui, Sex · 11:00 às 22:00"
+      ],
+      "reuse_days": 365,
+      "app_url": "https://app.appmaisum.com.br/share/dishes/2d104280-5b77-4dd2-9b2e-48a8042f5397"
+    },
+    {
+      "id": "11046635-7008-40bd-b192-8d2a0b73874a",
+      "partner": "Casa Bar e Restaurante",
+      "name": "Peixe Frito em Posta",
+      "category": "comida",
+      "category_label": "Comida e bebida",
+      "description": "Acompanha Arroz, Vinagrete, Farofa e Camarão Alho e Óleo.",
+      "price_cents": 8000,
+      "price_label": "R$ 80,00",
+      "photo": "https://pjewtzlrqtomilpivjai.supabase.co/storage/v1/object/public/restaurant-photos/benefits/11046635-7008-40bd-b192-8d2a0b73874a/1781733931358.jpg?v=1781733932096",
+      "address": "Avenida Juracy Magalhães, 2000, Felícia, Vitória da Conquista - BA, 45055235",
+      "rules": [
+        "Seg, Ter, Qua, Qui · 11:00 às 22:00"
+      ],
+      "reuse_days": 365,
+      "app_url": "https://app.appmaisum.com.br/share/dishes/11046635-7008-40bd-b192-8d2a0b73874a"
+    },
+    {
+      "id": "c7a13cdb-9e76-4faf-9ea0-2975dece1ff3",
+      "partner": "Espetinho Só na Brasa",
+      "name": "Jacuba",
+      "category": "comida",
+      "category_label": "Comida e bebida",
+      "description": "Jabá, banana da terra e farofa d’água. (Serve até 3 pessoas)",
+      "price_cents": 5990,
+      "price_label": "R$ 59,90",
+      "photo": "https://pjewtzlrqtomilpivjai.supabase.co/storage/v1/object/public/restaurant-photos/benefits/c7a13cdb-9e76-4faf-9ea0-2975dece1ff3/1780946706255.jpeg?v=1780946707268",
+      "address": "Avenida Serrinha, 2842, Brasil",
+      "rules": [
+        "Dom, Seg, Qua, Qui, Sex, Sáb · 17:00 às 23:59"
+      ],
+      "reuse_days": 365,
+      "app_url": "https://app.appmaisum.com.br/share/dishes/c7a13cdb-9e76-4faf-9ea0-2975dece1ff3"
+    },
+    {
+      "id": "b10ef8ac-c21f-4442-bc04-8a0262ee72f0",
+      "partner": "Espetinho Só na Brasa",
+      "name": "Jantinha",
+      "category": "comida",
+      "category_label": "Comida e bebida",
+      "description": "02 espetos, aipim/feijão tropeiro, vinagrete, farofa de manteiga.",
+      "price_cents": 3490,
+      "price_label": "R$ 34,90",
+      "photo": "https://pjewtzlrqtomilpivjai.supabase.co/storage/v1/object/public/restaurant-photos/benefits/b10ef8ac-c21f-4442-bc04-8a0262ee72f0/1780947299962.png?v=1780947302832",
+      "address": "Avenida Serrinha, 2842, Brasil",
+      "rules": [
+        "Dom, Seg, Qua, Qui, Sex, Sáb · 17:00 às 23:59"
+      ],
+      "reuse_days": 365,
+      "app_url": "https://app.appmaisum.com.br/share/dishes/b10ef8ac-c21f-4442-bc04-8a0262ee72f0"
+    },
+    {
+      "id": "a7cafbeb-0efa-40e3-be23-c9b421ffa8ef",
+      "partner": "Full House Espetinhos",
+      "name": "Jantinha",
+      "category": "comida",
+      "category_label": "Comida e bebida",
+      "description": "Jantinha com 02 espetinhos e acompanhamentos.",
+      "price_cents": 2990,
+      "price_label": "R$ 29,90",
+      "photo": "https://pjewtzlrqtomilpivjai.supabase.co/storage/v1/object/public/restaurant-photos/benefits/a7cafbeb-0efa-40e3-be23-c9b421ffa8ef/1781048989920.jpeg?v=1781048998384",
+      "address": "Avenida Braulino Santos, Candeias",
+      "rules": [
+        "Seg, Ter, Qua · 16:00 às 23:59"
+      ],
+      "reuse_days": 365,
+      "app_url": "https://app.appmaisum.com.br/share/dishes/a7cafbeb-0efa-40e3-be23-c9b421ffa8ef"
+    },
+    {
+      "id": "7c459ee1-0929-4a12-9f17-6729ab3e264c",
+      "partner": "4pizzas",
+      "name": "LongDog",
+      "category": "comida",
+      "category_label": "Comida e bebida",
+      "description": "Benefício 2 por 1. Confira as opções elegíveis e as condições na plataforma +UM.",
+      "price_cents": 1999,
+      "price_label": "R$ 19,99",
+      "photo": "https://pjewtzlrqtomilpivjai.supabase.co/storage/v1/object/public/dishes-photos/adf6d3eb-4a26-4aae-9097-3cc6485e34a7/7c459ee1-0929-4a12-9f17-6729ab3e264c-1783513804972.jpeg",
+      "address": "Avenida Juracy Magalhães, Felícia",
+      "rules": [
+        "Todos os dias · 11:00 às 22:00"
+      ],
+      "reuse_days": 365,
+      "app_url": "https://app.appmaisum.com.br/share/dishes/7c459ee1-0929-4a12-9f17-6729ab3e264c"
+    },
+    {
+      "id": "e8cf66c3-0041-4a8b-bd3c-a3aeb2995a70",
+      "partner": "Açaí Doce Sabor",
+      "name": "Açaí 380g",
+      "category": "comida",
+      "category_label": "Comida e bebida",
+      "description": "Na compra de um Acai 380g, você ganha MaisUm do mesmo.",
+      "price_cents": 2900,
+      "price_label": "R$ 29,00",
+      "photo": "https://pjewtzlrqtomilpivjai.supabase.co/storage/v1/object/public/restaurant-photos/benefits/e8cf66c3-0041-4a8b-bd3c-a3aeb2995a70/1780586230273.jpg?v=1780586235709",
+      "address": "Avenida Santa Marta, Centro",
+      "rules": [
+        "Todos os dias · 09:00 às 21:00"
+      ],
+      "reuse_days": 365,
+      "app_url": "https://app.appmaisum.com.br/share/dishes/e8cf66c3-0041-4a8b-bd3c-a3aeb2995a70"
+    },
+    {
+      "id": "c14cba97-bcb5-4594-a820-3e0836e97b41",
+      "partner": "Baduvei",
+      "name": "Porção de Mini Quibe c/ Geléia (6 unid.)",
+      "category": "comida",
+      "category_label": "Comida e bebida",
+      "description": "Leve 2 porçoes de mini kibes pelo preço de 1",
+      "price_cents": 3200,
+      "price_label": "R$ 32,00",
+      "photo": "https://pjewtzlrqtomilpivjai.supabase.co/storage/v1/object/public/restaurant-photos/benefits/c14cba97-bcb5-4594-a820-3e0836e97b41/1784899124598.jpeg?v=1784899125772",
+      "address": "Caminho Osvaldo Andrade Almeida, Candeias, 18",
+      "rules": [
+        "Dom, Ter, Qua, Qui · 14:00 às 21:00",
+        "Sex, Sáb · 12:00 às 21:00"
+      ],
+      "reuse_days": 365,
+      "app_url": "https://app.appmaisum.com.br/share/dishes/c14cba97-bcb5-4594-a820-3e0836e97b41"
+    },
+    {
+      "id": "bdbf719a-cfd7-4f36-8ccb-97b8eb973d21",
+      "partner": "Casa Bar e Restaurante",
+      "name": "Isca de Frango",
+      "category": "comida",
+      "category_label": "Comida e bebida",
+      "description": "Acompanhamentos",
+      "price_cents": 4000,
+      "price_label": "R$ 40,00",
+      "photo": "https://pjewtzlrqtomilpivjai.supabase.co/storage/v1/object/public/restaurant-photos/benefits/bdbf719a-cfd7-4f36-8ccb-97b8eb973d21/1781737820337.jpg?v=1781737822688",
+      "address": "Avenida Juracy Magalhães, 2000, Felícia, Vitória da Conquista - BA, 45055235",
+      "rules": [
+        "Seg, Ter, Qua, Qui · 11:00 às 22:00"
+      ],
+      "reuse_days": 365,
+      "app_url": "https://app.appmaisum.com.br/share/dishes/bdbf719a-cfd7-4f36-8ccb-97b8eb973d21"
+    },
+    {
+      "id": "c5c6c466-954b-4271-97cd-13c0077d8f9f",
+      "partner": "Cão primitivo",
+      "name": "Creche canina",
+      "category": "pet",
+      "category_label": "Pets",
+      "description": "Um dia de diversão para o seu amigo.",
+      "price_cents": 7000,
+      "price_label": "R$ 70,00",
+      "photo": "https://pjewtzlrqtomilpivjai.supabase.co/storage/v1/object/public/restaurant-photos/benefits/c5c6c466-954b-4271-97cd-13c0077d8f9f/1785187510649.jpg",
+      "address": "Rua Carioca, 246, Casa, Centro, Vitória da Conquista - BA, CEP 45000020",
+      "rules": [
+        "Seg, Ter, Qua, Qui, Sex · 07:30 às 17:00"
+      ],
+      "reuse_days": 365,
+      "app_url": "https://app.appmaisum.com.br/share/dishes/c5c6c466-954b-4271-97cd-13c0077d8f9f"
+    },
+    {
+      "id": "5d44248b-aa5a-40a1-a01e-38da8bd31c94",
+      "partner": "Empório D'Anjos",
+      "name": "Todos os Vinhos",
+      "category": "comida",
+      "category_label": "Comida e bebida",
+      "description": "Na compra de qualquer vinho, você ganha mais um do mesmo.",
+      "price_cents": null,
+      "price_label": "Consulte o valor",
+      "photo": "https://pjewtzlrqtomilpivjai.supabase.co/storage/v1/object/public/restaurant-photos/benefits/5d44248b-aa5a-40a1-a01e-38da8bd31c94/1779473657609.jpg?v=1779473658424",
+      "address": "Avenida Jardim Guanabara, Boa Vista, 944",
+      "rules": [
+        "Todos os dias · 11:00 às 22:00"
+      ],
+      "reuse_days": 365,
+      "app_url": "https://app.appmaisum.com.br/share/dishes/5d44248b-aa5a-40a1-a01e-38da8bd31c94"
+    },
+    {
+      "id": "ddc835b5-ea39-4e3c-83e4-c603e6544c1e",
+      "partner": "Espetinho Só na Brasa",
+      "name": "Tilápia Frita",
+      "category": "comida",
+      "category_label": "Comida e bebida",
+      "description": "Tilápia, cebola, alface e limão. (Serve até 3 pessoas)",
+      "price_cents": 4990,
+      "price_label": "R$ 49,90",
+      "photo": "https://pjewtzlrqtomilpivjai.supabase.co/storage/v1/object/public/restaurant-photos/benefits/ddc835b5-ea39-4e3c-83e4-c603e6544c1e/1780946542719.jpeg?v=1780946543945",
+      "address": "Avenida Serrinha, 2842, Brasil",
+      "rules": [
+        "Dom, Seg, Qua, Qui, Sex, Sáb · 17:00 às 23:59"
+      ],
+      "reuse_days": 365,
+      "app_url": "https://app.appmaisum.com.br/share/dishes/ddc835b5-ea39-4e3c-83e4-c603e6544c1e"
+    },
+    {
+      "id": "1b0a8db7-4bfd-42f1-ae44-d666f1d7e05d",
+      "partner": "Master Cook Café & Grill",
+      "name": "Self Service até 500g",
+      "category": "comida",
+      "category_label": "Comida e bebida",
+      "description": "Sirva-se num buffet completo e ganhe mais um prato de até 500g!",
+      "price_cents": null,
+      "price_label": "Consulte o valor",
+      "photo": "https://pjewtzlrqtomilpivjai.supabase.co/storage/v1/object/public/dishes-photos/4713b295-e7d5-48f2-99e0-ae82b54518ce/1b0a8db7-4bfd-42f1-ae44-d666f1d7e05d-1783818351340.jpeg",
+      "address": "Praça Barão do Rio Branco, 51B, Em frente a Banca Central, Centro, Vitória da Conquista - BA, CEP 45000385",
+      "rules": [
+        "Seg, Ter, Qua, Qui, Sex · 12:00 às 15:00",
+        "Sáb · 12:00 às 14:30"
+      ],
+      "reuse_days": 180,
+      "app_url": "https://app.appmaisum.com.br/share/dishes/1b0a8db7-4bfd-42f1-ae44-d666f1d7e05d"
+    },
+    {
+      "id": "079d0842-7992-4baf-a67b-6905ef47dd39",
+      "partner": "Mens club barbearia",
+      "name": "Barba",
+      "category": "beleza",
+      "category_label": "Beleza e cuidados",
+      "description": "Benefício 2 por 1. Confira as opções elegíveis e as condições na plataforma +UM.",
+      "price_cents": 2500,
+      "price_label": "R$ 25,00",
+      "photo": "https://pjewtzlrqtomilpivjai.supabase.co/storage/v1/object/public/dishes-photos/a24e5782-d8fe-4e4e-b4c6-1e3211394bba/079d0842-7992-4baf-a67b-6905ef47dd39-1783450195684.jpeg",
+      "address": "R. Pedro Bittencourt Ferraz,305, 305, Felicia, Vitória da Conquista - BA, CEP 45055395",
+      "rules": [
+        "Seg, Ter, Qua, Qui · 09:00 às 20:00"
+      ],
+      "reuse_days": 365,
+      "app_url": "https://app.appmaisum.com.br/share/dishes/079d0842-7992-4baf-a67b-6905ef47dd39"
+    },
+    {
+      "id": "3d8d176b-01a5-4c41-8ea2-3d3bfaa5b05a",
+      "partner": "Mens club barbearia",
+      "name": "Corte Cabelo",
+      "category": "beleza",
+      "category_label": "Beleza e cuidados",
+      "description": "Benefício 2 por 1. Confira as opções elegíveis e as condições na plataforma +UM.",
+      "price_cents": 4000,
+      "price_label": "R$ 40,00",
+      "photo": "https://pjewtzlrqtomilpivjai.supabase.co/storage/v1/object/public/dishes-photos/a24e5782-d8fe-4e4e-b4c6-1e3211394bba/3d8d176b-01a5-4c41-8ea2-3d3bfaa5b05a-1783449903076.jpeg",
+      "address": "R. Pedro Bittencourt Ferraz,305, 305, Felicia, Vitória da Conquista - BA, CEP 45055395",
+      "rules": [
+        "Seg, Ter, Qua, Qui · 09:00 às 20:00"
+      ],
+      "reuse_days": 365,
+      "app_url": "https://app.appmaisum.com.br/share/dishes/3d8d176b-01a5-4c41-8ea2-3d3bfaa5b05a"
+    },
+    {
+      "id": "e609c674-2aeb-44cf-82ff-2bef3bd7c048",
+      "partner": "Mens club barbearia",
+      "name": "Corte Cabelo + Barba",
+      "category": "beleza",
+      "category_label": "Beleza e cuidados",
+      "description": "Benefício 2 por 1. Confira as opções elegíveis e as condições na plataforma +UM.",
+      "price_cents": 5500,
+      "price_label": "R$ 55,00",
+      "photo": "https://pjewtzlrqtomilpivjai.supabase.co/storage/v1/object/public/dishes-photos/a24e5782-d8fe-4e4e-b4c6-1e3211394bba/e609c674-2aeb-44cf-82ff-2bef3bd7c048-1783450546063.jpeg",
+      "address": "R. Pedro Bittencourt Ferraz,305, 305, Felicia, Vitória da Conquista - BA, CEP 45055395",
+      "rules": [
+        "Seg, Ter, Qua, Qui · 09:00 às 20:00"
+      ],
+      "reuse_days": 365,
+      "app_url": "https://app.appmaisum.com.br/share/dishes/e609c674-2aeb-44cf-82ff-2bef3bd7c048"
+    },
+    {
+      "id": "5dd5ea6a-44eb-45ed-8b90-d6fc52e868ff",
+      "partner": "Mens club barbearia",
+      "name": "Corte Cabelo + Barba + Sobrancelha",
+      "category": "beleza",
+      "category_label": "Beleza e cuidados",
+      "description": "Benefício 2 por 1. Confira as opções elegíveis e as condições na plataforma +UM.",
+      "price_cents": 6000,
+      "price_label": "R$ 60,00",
+      "photo": "https://pjewtzlrqtomilpivjai.supabase.co/storage/v1/object/public/dishes-photos/a24e5782-d8fe-4e4e-b4c6-1e3211394bba/5dd5ea6a-44eb-45ed-8b90-d6fc52e868ff-1783450601074.jpeg",
+      "address": "R. Pedro Bittencourt Ferraz,305, 305, Felicia, Vitória da Conquista - BA, CEP 45055395",
+      "rules": [
+        "Seg, Ter, Qua, Qui · 09:00 às 20:00"
+      ],
+      "reuse_days": 365,
+      "app_url": "https://app.appmaisum.com.br/share/dishes/5dd5ea6a-44eb-45ed-8b90-d6fc52e868ff"
+    },
+    {
+      "id": "2ea62989-738e-40e2-91bc-5ee633b99ca1",
+      "partner": "Mia Nonna",
+      "name": "La Clássica",
+      "category": "comida",
+      "category_label": "Comida e bebida",
+      "description": "Na compra de um prato, ganhe mais um!",
+      "price_cents": 1499,
+      "price_label": "R$ 14,99",
+      "photo": "https://pjewtzlrqtomilpivjai.supabase.co/storage/v1/object/public/restaurant-photos/benefits/2ea62989-738e-40e2-91bc-5ee633b99ca1/1781197081700.jpeg?v=1781197082580",
+      "address": "Praça Joaquim Correia, Centro",
+      "rules": [
+        "Qua · 11:00 às 15:00"
+      ],
+      "reuse_days": 365,
+      "app_url": "https://app.appmaisum.com.br/share/dishes/2ea62989-738e-40e2-91bc-5ee633b99ca1"
+    },
+    {
+      "id": "b143280b-79e3-4f49-ba0c-5d2b36e24d5d",
+      "partner": "Mia Nonna",
+      "name": "Nonna Brava",
+      "category": "comida",
+      "category_label": "Comida e bebida",
+      "description": "Na compra de um prato, ganhe mais um!",
+      "price_cents": 2199,
+      "price_label": "R$ 21,99",
+      "photo": "https://pjewtzlrqtomilpivjai.supabase.co/storage/v1/object/public/restaurant-photos/benefits/b143280b-79e3-4f49-ba0c-5d2b36e24d5d/1779979285203.jpg?v=1779979286182",
+      "address": "Praça Joaquim Correia, Centro",
+      "rules": [
+        "Qua · 11:00 às 15:00"
+      ],
+      "reuse_days": 365,
+      "app_url": "https://app.appmaisum.com.br/share/dishes/b143280b-79e3-4f49-ba0c-5d2b36e24d5d"
+    },
+    {
+      "id": "73aabaea-5692-4901-a425-461ae0f41e0a",
+      "partner": "Pizzaria Vitória",
+      "name": "Drinks",
+      "category": "comida",
+      "category_label": "Comida e bebida",
+      "description": "Na compra de qualquer drink ganhe mais um do mesmo.",
+      "price_cents": null,
+      "price_label": "Consulte o valor",
+      "photo": "https://pjewtzlrqtomilpivjai.supabase.co/storage/v1/object/public/restaurant-photos/benefits/73aabaea-5692-4901-a425-461ae0f41e0a/1780422738506.jpeg?v=1780422739096",
+      "address": "Avenida Frei Benjamim, 1906 Brasil",
+      "rules": [
+        "Seg · 11:00 às 23:59"
+      ],
+      "reuse_days": 365,
+      "app_url": "https://app.appmaisum.com.br/share/dishes/73aabaea-5692-4901-a425-461ae0f41e0a"
+    },
+    {
+      "id": "09d1ebd2-03df-4e85-91de-04d7ef601fd2",
+      "partner": "Péricles",
+      "name": "Tortinha",
+      "category": "comida",
+      "category_label": "Comida e bebida",
+      "description": "Na compra de uma tortinha de qualquer sabor, você ganha mais uma tortinha de frango!",
+      "price_cents": 1500,
+      "price_label": "R$ 15,00",
+      "photo": "https://pjewtzlrqtomilpivjai.supabase.co/storage/v1/object/public/restaurant-photos/benefits/09d1ebd2-03df-4e85-91de-04d7ef601fd2/1779822353596.jpeg?v=1779822354829",
+      "address": "Avenida Olívia Flores, Candeias, 762",
+      "rules": [
+        "Dom, Sex, Sáb · 10:00 às 21:00",
+        "Seg, Ter, Qua, Qui · 12:00 às 20:00"
+      ],
+      "reuse_days": 365,
+      "app_url": "https://app.appmaisum.com.br/share/dishes/09d1ebd2-03df-4e85-91de-04d7ef601fd2"
+    },
+    {
+      "id": "46540921-da87-4625-a9bb-ef6664c45ce7",
+      "partner": "Rancho Imperial",
+      "name": "Porção de Quibe",
+      "category": "comida",
+      "category_label": "Comida e bebida",
+      "description": "7 unidades de quibe tradicional.",
+      "price_cents": 3000,
+      "price_label": "R$ 30,00",
+      "photo": "https://pjewtzlrqtomilpivjai.supabase.co/storage/v1/object/public/restaurant-photos/benefits/46540921-da87-4625-a9bb-ef6664c45ce7/1781213055131.jpeg?v=1781213059635",
+      "address": "Rua Bolívia, Jurema",
+      "rules": [
+        "Qua · 17:00 às 23:59"
+      ],
+      "reuse_days": 365,
+      "app_url": "https://app.appmaisum.com.br/share/dishes/46540921-da87-4625-a9bb-ef6664c45ce7"
+    },
+    {
+      "id": "2364d295-87ad-444e-ae61-611ff4408c47",
+      "partner": "Royal Trudel",
+      "name": "Trudel de Doce de Leite",
+      "category": "comida",
+      "category_label": "Comida e bebida",
+      "description": "Na compra de um, você ganha +um!",
+      "price_cents": 1990,
+      "price_label": "R$ 19,90",
+      "photo": "https://pjewtzlrqtomilpivjai.supabase.co/storage/v1/object/public/dishes-photos/7b3df522-1ff7-45e4-a83d-b6cec064e519/2364d295-87ad-444e-ae61-611ff4408c47-1779823089976.jpeg",
+      "address": "Avenida Juracy Magalhães, Felícia",
+      "rules": [
+        "Seg, Ter, Qua, Qui, Sex · 11:00 às 22:00"
+      ],
+      "reuse_days": 365,
+      "app_url": "https://app.appmaisum.com.br/share/dishes/2364d295-87ad-444e-ae61-611ff4408c47"
+    },
+    {
+      "id": "7b5e3c76-8c59-4e6a-95e8-dbbebedacfe1",
+      "partner": "Sorvete Amigo",
+      "name": "Self-service no Kg",
+      "category": "comida",
+      "category_label": "Comida e bebida",
+      "description": "Na compra de R$ 20,00 no kg, você ganha mais R$ 20,00.",
+      "price_cents": 2000,
+      "price_label": "R$ 20,00",
+      "photo": "https://pjewtzlrqtomilpivjai.supabase.co/storage/v1/object/public/restaurant-photos/benefits/7b5e3c76-8c59-4e6a-95e8-dbbebedacfe1/1780335234923.jpg?v=1780335235937",
+      "address": "Avenida Juracy Magalhães, Felícia",
+      "rules": [
+        "Todos os dias · 12:00 às 22:00"
+      ],
+      "reuse_days": 365,
+      "app_url": "https://app.appmaisum.com.br/share/dishes/7b5e3c76-8c59-4e6a-95e8-dbbebedacfe1"
+    },
+    {
+      "id": "0efbc180-eb01-42b0-b06e-8463d33b86b1",
+      "partner": "Texas Saloon",
+      "name": "Panceta",
+      "category": "comida",
+      "category_label": "Comida e bebida",
+      "description": "Benefício 2 por 1. Confira as opções elegíveis e as condições na plataforma +UM.",
+      "price_cents": 4990,
+      "price_label": "R$ 49,90",
+      "photo": "https://pjewtzlrqtomilpivjai.supabase.co/storage/v1/object/public/dishes-photos/c9208777-21e8-402a-92a6-5bd2fc57ab4a/0efbc180-eb01-42b0-b06e-8463d33b86b1-1779416048682.jpeg",
+      "address": "Avenida Alberto Leal, Candeias",
+      "rules": [
+        "Seg, Ter, Qua · 18:00 às 23:59"
+      ],
+      "reuse_days": 365,
+      "app_url": "https://app.appmaisum.com.br/share/dishes/0efbc180-eb01-42b0-b06e-8463d33b86b1"
+    },
+    {
+      "id": "3dc16b0f-ce60-46c4-bc94-3161c0773fa7",
+      "partner": "Varanda da Ale",
+      "name": "Xinxim de bofe",
+      "category": "comida",
+      "category_label": "Comida e bebida",
+      "description": "Xinxim de bofe com camarão seco e leite de cocô, arroz branco, farofa crocante e vinagrete.",
+      "price_cents": 5400,
+      "price_label": "R$ 54,00",
+      "photo": "https://pjewtzlrqtomilpivjai.supabase.co/storage/v1/object/public/restaurant-photos/benefits/3dc16b0f-ce60-46c4-bc94-3161c0773fa7/1785296880666.jpg",
+      "address": "Rua A, 119, Primavera, Vitória da Conquista - BA, CEP 45012339",
+      "rules": [
+        "Sex · 11:30 às 15:30",
+        "Sáb · 09:00 às 15:30",
+        "Dom · 11:30 às 16:00",
+        "Qui · 09:00 às 18:00"
+      ],
+      "reuse_days": 365,
+      "app_url": "https://app.appmaisum.com.br/share/dishes/3dc16b0f-ce60-46c4-bc94-3161c0773fa7"
+    },
+    {
+      "id": "c329b6a8-de28-40d0-8873-df18d6148035",
+      "partner": "Vitória Lanches",
+      "name": "Pastel de frango, queijo e bacon",
+      "category": "comida",
+      "category_label": "Comida e bebida",
+      "description": "Leve 2, pague 1",
+      "price_cents": 2500,
+      "price_label": "R$ 25,00",
+      "photo": "https://pjewtzlrqtomilpivjai.supabase.co/storage/v1/object/public/restaurant-photos/benefits/c329b6a8-de28-40d0-8873-df18d6148035/1781144120643.jpeg?v=1781144121644",
+      "address": "Avenida Frei Benjamim, Brasil",
+      "rules": [
+        "Seg, Ter, Qua, Qui · 18:00 às 23:59"
+      ],
+      "reuse_days": 365,
+      "app_url": "https://app.appmaisum.com.br/share/dishes/c329b6a8-de28-40d0-8873-df18d6148035"
+    },
+    {
+      "id": "cb195b90-fcdf-49ea-ab9a-f74d2b8174b5",
+      "partner": "Vitória Lanches",
+      "name": "Porção de batata frita 400g",
+      "category": "comida",
+      "category_label": "Comida e bebida",
+      "description": "Leve 2, pague 1",
+      "price_cents": 3000,
+      "price_label": "R$ 30,00",
+      "photo": "https://pjewtzlrqtomilpivjai.supabase.co/storage/v1/object/public/restaurant-photos/benefits/cb195b90-fcdf-49ea-ab9a-f74d2b8174b5/1781143998995.jpeg?v=1781143999787",
+      "address": "Avenida Frei Benjamim, Brasil",
+      "rules": [
+        "Seg, Ter, Qua, Qui · 18:00 às 23:59"
+      ],
+      "reuse_days": 365,
+      "app_url": "https://app.appmaisum.com.br/share/dishes/cb195b90-fcdf-49ea-ab9a-f74d2b8174b5"
+    },
+    {
+      "id": "d4dc3de2-7e5d-4aa7-b5f2-644f416ce502",
+      "partner": "Vitória Lanches",
+      "name": "X-Bacon",
+      "category": "comida",
+      "category_label": "Comida e bebida",
+      "description": "Leve 2, pague 1",
+      "price_cents": 2500,
+      "price_label": "R$ 25,00",
+      "photo": "https://pjewtzlrqtomilpivjai.supabase.co/storage/v1/object/public/restaurant-photos/benefits/d4dc3de2-7e5d-4aa7-b5f2-644f416ce502/1780358247593.jpeg?v=1780358248348",
+      "address": "Avenida Frei Benjamim, Brasil",
+      "rules": [
+        "Seg, Ter, Qua, Qui · 18:00 às 23:59"
+      ],
+      "reuse_days": 365,
+      "app_url": "https://app.appmaisum.com.br/share/dishes/d4dc3de2-7e5d-4aa7-b5f2-644f416ce502"
+    },
+    {
+      "id": "e2baed41-eb85-4dc1-88cc-f8a02452cd91",
+      "partner": "Waze açaí e sorvetes",
+      "name": "Self Service Açaí e Sorvetes",
+      "category": "comida",
+      "category_label": "Comida e bebida",
+      "description": "16 opções de sorvete e açaí",
+      "price_cents": null,
+      "price_label": "Consulte o valor",
+      "photo": "https://pjewtzlrqtomilpivjai.supabase.co/storage/v1/object/public/restaurant-photos/benefits/e2baed41-eb85-4dc1-88cc-f8a02452cd91/1783454247649.jpeg?v=1783454252833",
+      "address": "Avenida Juracy Magalhães, 3340, shopping conquista Sul, Boa Vista, Vitória da Conquista - BA, CEP 45026090",
+      "rules": [
+        "Seg, Ter, Qua, Qui · 12:00 às 22:00"
+      ],
+      "reuse_days": 90,
+      "app_url": "https://app.appmaisum.com.br/share/dishes/e2baed41-eb85-4dc1-88cc-f8a02452cd91"
+    }
+  ]
+}

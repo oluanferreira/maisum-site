@@ -21,7 +21,7 @@ class CentralTests(unittest.TestCase):
   cls.source=(ROOT/'links/index.html').read_text();cls.doc=Document(cls.source)
   cls.links={a['data-link']:a for a in cls.doc.links if 'data-link' in a}
  def test_all_audiences_and_verified_destinations(self):
-  expected={'app':'https://app.appmaisum.com.br/login','consumer':'/experiencias','passport':'https://pay.cakto.com.br/3e7t64x_1061003?coupon=blackmaisum','register':'https://restaurante.appmaisum.com.br/cadastro'}
+  expected={'app':'https://app.appmaisum.com.br/login','consumer':'/experiencias','passport':'https://app.appmaisum.com.br/checkout/black-friday','register':'https://restaurante.appmaisum.com.br/cadastro'}
   self.assertEqual(set(self.links),set(expected)|{'influencer','support-user','support-partner'})
   for key,url in expected.items():self.assertEqual(self.links[key]['href'],url)
  def test_black_friday_offer(self):

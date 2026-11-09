@@ -11,14 +11,16 @@ class Links(HTMLParser):
   a=dict(attrs)
   if tag=='a' and 'href' in a: self.hrefs.append(a['href'])
 class BlackFridayContract(unittest.TestCase):
- def test_exact_checkout_coupon_on_all_three_pages(self):
-  for file in ['index.html','links/index.html','experiencias/index.html']:
+ def test_exact_app_purchase_entry_on_all_three_pages(self):
+  for file,expected_count in [('index.html',5),('links/index.html',1),('experiencias/index.html',3),('experiencias/template.html',3)]:
    with self.subTest(file=file):
-    urls=[urlsplit(h) for h in Links((ROOT/file).read_text()).hrefs if 'pay.cakto.com.br' in h]
-    self.assertTrue(urls)
+    hrefs=Links((ROOT/file).read_text()).hrefs
+    self.assertFalse(any('pay.cakto.com.br' in href for href in hrefs))
+    urls=[urlsplit(h) for h in hrefs if '/checkout/black-friday' in h]
+    self.assertEqual(len(urls),expected_count)
     for u in urls:
-     self.assertEqual((u.scheme,u.netloc,u.path),('https','pay.cakto.com.br','/3e7t64x_1061003'))
-     self.assertEqual(parse_qs(u.query),{'coupon':['blackmaisum']})
+     self.assertEqual((u.scheme,u.netloc,u.path),('https','app.appmaisum.com.br','/checkout/black-friday'))
+     self.assertEqual(parse_qs(u.query),{})
  def test_single_introductory_price_and_no_fabricated_deadline(self):
   for file in ['index.html','links/index.html','experiencias/template.html']:
    with self.subTest(file=file):

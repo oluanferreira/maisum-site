@@ -59,16 +59,16 @@ with sync_playwright() as p:
  for query,expected in [('',None),('?affiliate=creator_test','creator_test'),('?affiliate=a&affiliate=b',None),('?affiliate=bad%20name',None),('?affiliate=valid_42&utm_source=qa&secret=do-not-forward','valid_42')]:
   page.goto(BASE+query,wait_until='networkidle')
   for href in page.locator('[data-checkout]').evaluate_all('(els)=>els.map(a=>a.href)'):
-   u=urlparse(href);assert u.scheme=='https' and u.netloc=='pay.cakto.com.br' and u.path=='/3e7t64x_1061003'
-   assert parse_qs(u.query)==({'coupon':['blackmaisum'],'affiliate':[expected]} if expected else {'coupon':['blackmaisum']}),href
+   u=urlparse(href);assert u.scheme=='https' and u.netloc=='app.appmaisum.com.br' and u.path=='/checkout/black-friday'
+   assert parse_qs(u.query)==({'affiliate':[expected]} if expected else {}),href
   for href in page.locator('a.app-link').evaluate_all('(els)=>els.map(a=>a.href)'):assert 'affiliate=' not in href
  # Intercept and verify the exact destination before a request can reach the payment provider.
  intercepted=[]
  def checkout(route):
   intercepted.append(route.request.url);route.fulfill(status=200,content_type='text/html',body='<h1>Checkout intercepted for QA. No purchase.</h1>')
- page.route('https://pay.cakto.com.br/**',checkout)
- page.locator('.offer-card [data-checkout]').click();page.wait_for_url('https://pay.cakto.com.br/**')
- assert intercepted==['https://pay.cakto.com.br/3e7t64x_1061003?coupon=blackmaisum&affiliate=valid_42'],intercepted
+ page.route('https://app.appmaisum.com.br/checkout/black-friday**',checkout)
+ page.locator('.offer-card [data-checkout]').click();page.wait_for_url('https://app.appmaisum.com.br/checkout/black-friday**')
+ assert intercepted==['https://app.appmaisum.com.br/checkout/black-friday?affiliate=valid_42'],intercepted
  # Simulated image outage must reveal the branded fallback and leave the card usable.
  fallback=context.new_page();fallback.route('https://pjewtzlrqtomilpivjai.supabase.co/storage/**',lambda route:route.abort())
  fallback.goto(BASE,wait_until='networkidle');first=fallback.locator('.experience-card').first;first.scroll_into_view_if_needed()
@@ -79,7 +79,7 @@ with sync_playwright() as p:
  nojs=browser.new_context(java_script_enabled=False,viewport={'width':390,'height':844})
  np=nojs.new_page();np.goto(BASE,wait_until='networkidle');assert np.locator('.experience-card').count()==27;assert not np.locator('#catalog-controls').is_visible()
  np.locator('.experience-card').first.locator('summary').click();assert np.locator('.experience-card').first.locator('details').get_attribute('open') is not None
- assert np.locator('[data-checkout]').first.get_attribute('href')=='https://pay.cakto.com.br/3e7t64x_1061003?coupon=blackmaisum'
+ assert np.locator('[data-checkout]').first.get_attribute('href')=='https://app.appmaisum.com.br/checkout/black-friday'
  np.screenshot(path=str(OUT/'catalogo-nojs.png'))
  browser.close()
 server.shutdown();(OUT/'results.json').write_text(json.dumps({'responsive':results,'accent_search':True,'empty_reset':True,'query_state':True,'deep_link':True,'affiliate_exact_checkout':True,'checkout_intercepted_no_purchase':True,'simulated_image_fallback':True,'no_js':True,'image_urls_using_fallback':sorted(set(broken))},indent=2))

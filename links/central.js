@@ -1,5 +1,5 @@
 // Forward only a single explicit, valid campaign affiliate to owned navigation
-// and the verified annual checkout. Organic visits remain unassigned.
+// and the verified Black Friday purchase entry. Organic visits remain unassigned.
 // No persistent storage, arbitrary query forwarding, or commission rules.
 (() => {
   const values = new URLSearchParams(location.search).getAll('affiliate');
@@ -8,8 +8,8 @@
   document.querySelectorAll('a[href]').forEach((link) => {
     const destination = new URL(link.href, location.href);
     const ownedPage = destination.origin === location.origin && localPaths.has(destination.pathname);
-    const annualCheckout = destination.origin === 'https://pay.cakto.com.br' && destination.pathname === '/3e7t64x_1061003';
-    if (!ownedPage && !annualCheckout) return;
+    const purchaseEntry = destination.origin === 'https://app.appmaisum.com.br' && destination.pathname === '/checkout/black-friday';
+    if (!ownedPage && !purchaseEntry) return;
     destination.searchParams.set('affiliate', values[0]);
     link.href = destination.toString();
   });

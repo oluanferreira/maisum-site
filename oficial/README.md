@@ -9,7 +9,7 @@
 ## Fatos
 - Luan confirmou que existem mais de 50 experiências. Os 32 registros operacionais são ofertas/benefícios, alguns abrangendo cardápios completos. Não usar 32 como total de experiências.
 - Todas as experiências são 2 por 1, conforme esclarecimento de Luan. Condições e intervalos variam por parceiro.
-- Checkout verificado em 09/11/2026: https://pay.cakto.com.br/3e7t64x_1061003 ; R$ 97,00/ano + R$ 0,99 de serviço, R$ 97,99 à vista, renovação anual. Parcelamento pode ter acréscimos.
+- Entrada de compra Black Friday: https://app.appmaisum.com.br/checkout/black-friday . O app identifica a conta por Google e abre a oferta Cakto de R$ 47,99 no primeiro ano (taxa incluída); quem já possui acesso anual não é cobrado novamente. O frontend envia apenas um affiliate válido. Cupom, atribuição interna e condições de renovação são tratados pelo backend e pelo checkout.
 - Quatro ofertas selecionadas usam IDs, nomes, valores e parceiros do snapshot operacional de 09/11/2026. A página aponta a necessidade de conferir a ficha atual.
 
 ## Composição de Léo

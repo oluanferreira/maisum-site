@@ -28,7 +28,7 @@ class CatalogContract(unittest.TestCase):
   self.assertGreater(unknown,0);self.assertNotRegex(self.page,r'R\$\s*(?:&nbsp;)?0,00')
  def test_safe_verified_links_and_assets(self):
   checkouts=[a['href'] for t,a in self.dom.nodes if t=='a' and 'data-checkout' in a];self.assertGreaterEqual(len(checkouts),3)
-  self.assertEqual(set(checkouts),{'https://pay.cakto.com.br/3e7t64x_1061003?coupon=blackmaisum'})
+  self.assertEqual(set(checkouts),{'https://app.appmaisum.com.br/checkout/black-friday'})
   for t,a in self.dom.nodes:
    if 'src' in a and a['src'].startswith('/'):self.assertTrue((ROOT/a['src'][1:]).is_file(),a['src'])
    if t=='a' and a.get('target')=='_blank':self.assertIn('noopener',a.get('rel',''))

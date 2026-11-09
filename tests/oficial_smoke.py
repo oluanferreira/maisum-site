@@ -69,7 +69,7 @@ with sync_playwright() as p:
   assert 'Renovação anual' in offer and 'Condições no checkout' in offer
   assert '97,99' not in page.locator('body').inner_text()
   assert page.locator('.hero-price').inner_text().find('R$ 47,99')>=0
-  assert page.locator('[data-checkout]').evaluate_all("els=>els.every(a=>a.href==='https://pay.cakto.com.br/3e7t64x_1061003?coupon=blackmaisum')")
+  assert page.locator('[data-checkout]').evaluate_all("els=>els.every(a=>a.href==='https://app.appmaisum.com.br/checkout/black-friday')")
   assert page.locator('img:not([loading="lazy"])').evaluate_all('(images)=>images.every(i=>i.complete && i.naturalWidth>0)'), 'missing hero image'
   assert page.locator('[data-checkout]').evaluate_all('(links)=>links.filter(a=>a.getBoundingClientRect().height>0).every(a=>a.getBoundingClientRect().height>=44)'), 'checkout touch size'
   assert page.locator('.hero-actions>a,.text-link').evaluate_all('(links)=>links.every(a=>a.getBoundingClientRect().height>=44)'), 'secondary action touch size'
@@ -95,7 +95,10 @@ with sync_playwright() as p:
   for link in page.locator('[data-checkout], [data-catalog]').all():
    href=link.get_attribute('href')
    assert (f'affiliate={expected}' in href) if expected else ('affiliate=' not in href),href
-   if link.get_attribute('data-checkout') is not None:assert 'coupon=blackmaisum' in href,href
+   if link.get_attribute('data-checkout') is not None:
+    from urllib.parse import urlparse,parse_qs
+    u=urlparse(href);assert u.netloc=='app.appmaisum.com.br' and u.path=='/checkout/black-friday'
+    assert parse_qs(u.query)==({'affiliate':[expected]} if expected else {}),href
  # Verify member navigation without requesting the real login service.
  login_requests=[]
  def login_intercept(route):
@@ -118,10 +121,10 @@ with sync_playwright() as p:
  def checkout_intercept(route):
   checkout_requests.append(route.request.url)
   route.fulfill(status=200,content_type='text/html',body='<title>QA checkout interception</title>')
- page.route('https://pay.cakto.com.br/**',checkout_intercept)
+ page.route('https://app.appmaisum.com.br/checkout/black-friday**',checkout_intercept)
  page.goto('http://127.0.0.1:8132/?affiliate=creator_test',wait_until='networkidle')
- page.locator('.hero-actions [data-checkout]').click();page.wait_for_url('https://pay.cakto.com.br/**')
- assert checkout_requests==['https://pay.cakto.com.br/3e7t64x_1061003?coupon=blackmaisum&affiliate=creator_test'],checkout_requests
+ page.locator('.hero-actions [data-checkout]').click();page.wait_for_url('https://app.appmaisum.com.br/checkout/black-friday**')
+ assert checkout_requests==['https://app.appmaisum.com.br/checkout/black-friday?affiliate=creator_test'],checkout_requests
  page.goto('http://127.0.0.1:8132/',wait_until='networkidle');page.keyboard.press('Tab');assert page.locator('.skip-link').evaluate('(e)=>e===document.activeElement')
  nojs=browser.new_context(java_script_enabled=False,viewport={'width':390,'height':844});np=nojs.new_page();np.goto('http://127.0.0.1:8132/',wait_until='networkidle');assert np.locator('.hero-actions [data-checkout]').is_visible();assert np.locator('.header-account').is_visible();assert np.locator('.header-partner').is_visible();assert np.locator('.experience-card').count()==4;np.screenshot(path=str(OUT/'home-nojs.png'),full_page=True)
  browser.close()

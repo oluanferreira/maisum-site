@@ -5,7 +5,7 @@
   if (values.length === 1 && /^[A-Za-z0-9_-]{1,128}$/.test(values[0])) {
     document.querySelectorAll('[data-checkout], [data-catalog]').forEach(link => {
       const url = new URL(link.getAttribute('href'), location.href);
-      if (url.origin === location.origin || (url.origin === 'https://pay.cakto.com.br' && url.pathname === '/3e7t64x_1061003')) {
+      if (url.origin === location.origin || (url.origin === 'https://app.appmaisum.com.br' && url.pathname === '/checkout/black-friday')) {
         url.searchParams.set('affiliate', values[0]); link.href = url.toString();
       }
     });

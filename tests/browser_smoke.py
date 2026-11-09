@@ -27,7 +27,7 @@ with sync_playwright() as p:
   assert page.locator('.route-copy>p, .help-heading p:last-child').evaluate_all('(els)=>els.every(e=>parseFloat(getComputedStyle(e).fontSize)>=12)'), 'Small essential description'
   assert page.locator('.hero-description').evaluate('(e)=>parseFloat(getComputedStyle(e).fontSize)>=11.5'), 'Small hero description'
   assert page.locator('.passport.black-friday').count()==1
-  assert page.locator('[data-link="passport"]').get_attribute('href')=='https://pay.cakto.com.br/3e7t64x_1061003?coupon=blackmaisum'
+  assert page.locator('[data-link="passport"]').get_attribute('href')=='https://app.appmaisum.com.br/checkout/black-friday'
   assert 'R$ 47,99' in page.locator('.passport').inner_text()
   assert 'no primeiro ano' in page.locator('.passport').inner_text()
   assert page.locator('[data-link="partner-login"]').count()==0
@@ -48,15 +48,21 @@ with sync_playwright() as p:
  page=browser.new_page(viewport={'width':390,'height':844})
  page.goto('http://127.0.0.1:8124/links/?affiliate=test_creator',wait_until='networkidle')
  page.locator('[data-link="consumer"]').click();page.wait_for_url('**/experiencias/?affiliate=test_creator')
- for a in page.locator('a[href*="pay.cakto.com.br"]').all():assert 'affiliate=test_creator' in a.get_attribute('href')
+ for a in page.locator('a[href*="/checkout/black-friday"]').all():assert 'affiliate=test_creator' in a.get_attribute('href')
  page.go_back();page.reload();assert 'affiliate=test_creator' in page.locator('[data-link="consumer"]').get_attribute('href')
  page.goto('http://127.0.0.1:8124/links/');page.keyboard.press('Tab');assert page.locator('.skip-link').evaluate('(e)=>e===document.activeElement');page.keyboard.press('Enter');assert page.evaluate('location.hash')=='#links'
  page.context.route('https://wa.me/**',lambda route:route.fulfill(status=200,content_type='text/html',body='<p>Intercepted for QA</p>'))
  for audience in ['influencer','support-user','support-partner']:
   with page.expect_popup() as info:page.locator(f'[data-link="{audience}"]').click()
   popup=info.value;popup.wait_for_load_state();assert popup.url.startswith('https://wa.me/5577999571376?text=');popup.close()
+ purchase_requests=[]
+ def purchase_intercept(route):
+  purchase_requests.append(route.request.url);route.fulfill(status=200,content_type='text/html',body='<p>Purchase entry intercepted. No login or payment.</p>')
+ page.context.route('https://app.appmaisum.com.br/checkout/black-friday**',purchase_intercept)
+ page.goto('http://127.0.0.1:8124/links/?affiliate=creator_test&coupon=ignored&email=private');page.locator('[data-link="passport"]').click();page.wait_for_url('https://app.appmaisum.com.br/checkout/black-friday?affiliate=creator_test')
+ assert purchase_requests==['https://app.appmaisum.com.br/checkout/black-friday?affiliate=creator_test'],purchase_requests
  page.context.route('https://app.appmaisum.com.br/login',lambda route:route.fulfill(status=200,content_type='text/html',body='<p>Login navigation intercepted for QA</p>'))
  page.goto('http://127.0.0.1:8124/links/?affiliate=test_creator');page.locator('[data-link="app"]').click();page.wait_for_url('https://app.appmaisum.com.br/login')
  nojs=browser.new_context(java_script_enabled=False,viewport={'width':390,'height':844});np=nojs.new_page();np.goto('http://127.0.0.1:8124/links/');assert np.locator('[data-link]').count()==7;np.screenshot(path=str(OUT/'central-nojs.png'),full_page=True)
  browser.close()
-server.shutdown();(OUT/'results.json').write_text(json.dumps({'responsive':results,'affiliate_roundtrip':True,'whatsapp_intercepted':3,'no_js':True,'keyboard':True,'account_login_intercepted':True},indent=2));print('PASS: 8 viewports, no overflow/errors, font, affiliate checkout, no-JS, keyboard, WhatsApp destinations.')
+server.shutdown();(OUT/'results.json').write_text(json.dumps({'responsive':results,'affiliate_roundtrip':True,'whatsapp_intercepted':3,'no_js':True,'keyboard':True,'account_login_intercepted':True,'purchase_entry_intercepted_no_payment':True},indent=2));print('PASS: 8 viewports, no overflow/errors, font, affiliate checkout, no-JS, keyboard, WhatsApp destinations.')

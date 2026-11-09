@@ -60,3 +60,14 @@
 .help-links strong{font-size:13px}.help-links small{font-size:11px;line-height:1.5}
 .footnote{font-size:10px;line-height:1.6}footer>p{font-size:12px}
 @media(max-width:350px){.leo-intro .hero-description{font-size:11.5px;max-width:118px}.category{font-size:8px}.passport.black-friday .route-action{font-size:12px}.help-links a{padding-inline:11px}.help-links small{font-size:11px;min-height:33px}}
+
+/* In-between phones need the compact hero too, not only 320px devices. */
+@media(min-width:351px) and (max-width:380px){
+ .leo-intro{min-height:258px;margin-top:24px;padding-top:7px}
+ .hero-copy{width:54%;max-width:175px}
+ .leo-intro h1{font-size:29px;letter-spacing:-1.25px;margin-top:12px}
+ .leo-intro h1 em{font-size:39px}
+ .leo-intro .hero-description{font-size:12px;max-width:130px;line-height:1.5;margin-top:14px}
+ .leo-campaign{width:240px;height:240px;right:-29px;top:12px}
+}
+@media(max-width:380px){.experience .discovery-art{width:120px;height:125px;right:-20px;top:64px}}

@@ -14,7 +14,12 @@ with sync_playwright() as p:
   page=browser.new_page(viewport={'width':width,'height':height},reduced_motion='reduce')
   errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
   page.goto('http://127.0.0.1:8132/',wait_until='networkidle');page.evaluate('document.fonts.ready')
-  assert page.evaluate('document.documentElement.scrollWidth<=innerWidth'),(width,'overflow')
+  # Save the actual layout and screenshot before assertions, including failures.
+  layout=page.evaluate("""() => ({viewport:innerWidth,documentWidth:document.documentElement.scrollWidth,bodyWidth:document.body.scrollWidth,overflowing:[...document.querySelectorAll('body *')].map(e=>{const r=e.getBoundingClientRect();const s=getComputedStyle(e);let parent=e.parentElement,clippedBy=null;while(parent){const p=getComputedStyle(parent);if(['hidden','clip','scroll','auto'].includes(p.overflowX)){clippedBy=parent.tagName.toLowerCase()+'.'+parent.className;break}parent=parent.parentElement}return {tag:e.tagName.toLowerCase(),class:e.className,id:e.id,left:r.left,right:r.right,width:r.width,cssWidth:s.width,maxWidth:s.maxWidth,minWidth:s.minWidth,overflowX:s.overflowX,clippedBy,visible:r.width>0&&r.height>0}}).filter(e=>e.visible&&(e.right>innerWidth+.5||e.left<-.5)).slice(0,100)})""")
+  (OUT/f'layout-{width}x{height}.json').write_text(json.dumps(layout,indent=2))
+  page.screenshot(path=str(OUT/f'initial-{width}x{height}.png'),full_page=True)
+  assert layout['documentWidth']<=width,(width,'overflow',layout)
+
   assert page.evaluate("document.fonts.check('650 30px DM')"),'font'
   assert not errors,errors
   assert page.locator('h1').count()==1

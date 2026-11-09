@@ -18,3 +18,11 @@
 /* Accessible action areas and secondary text on compact screens. */
 .header-buy{min-height:44px}.menu-toggle{min-width:44px;min-height:44px}
 @media(max-width:600px){.hero-price{font-size:10px}.offer-terms{font-size:10px}.offer-total{font-size:11px}.footer-note small{font-size:9px}.catalog-note{font-size:10px}.step-footnote{font-size:10px}.mobile-buy>div>span{font-size:8px}.benefit-label{font-size:8px}.experience-meta>p{font-size:9px}.experience-bottom>span:first-child{font-size:9px}.detail-label{font-size:10px}.offer-bottomline{font-size:7px}}
+
+/* The artwork must size against its grid track, not impose a 360/480px
+   minimum on a 288px mobile content area. Keep every photo/card visible. */
+.hero-copy,.hero-art{min-width:0}
+.hero h1{word-spacing:.025em}
+.portrait-caption{text-align:center;padding-inline:12px}
+@media(max-width:850px){.hero{grid-template-columns:minmax(0,1fr)}.hero-art{width:min(480px,100%);max-width:100%}}
+@media(max-width:600px){.hero-art{width:100%;max-width:360px}.portrait-caption>span{font-size:18px}}

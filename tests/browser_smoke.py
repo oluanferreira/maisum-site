@@ -25,7 +25,7 @@ with sync_playwright() as p:
    assert page.locator('[data-link="passport"] .route-action').bounding_box()['y']+page.locator('[data-link="passport"] .route-action').bounding_box()['height']<height,'Purchase action below first screen'
   assert page.locator('[data-link]').evaluate_all('(links)=>links.every(a=>a.getBoundingClientRect().height>=44)'), 'Touch target too small'
   assert page.locator('img').evaluate_all('(images)=>images.filter(i=>i.loading!=="lazy").every(i=>i.complete && i.naturalWidth>0)'), 'Missing eager image'
-  page.locator('.discovery-art').scroll_into_view_if_needed();page.locator('.discovery-art').evaluate('(i)=>i.decode()');page.evaluate('scrollTo(0,0)')
+  page.locator('[data-link="consumer"]').scroll_into_view_if_needed();page.locator('.discovery-art').evaluate('(i)=>i.decode()');page.evaluate('scrollTo(0,0)')
   page.screenshot(path=str(OUT/f'central-{width}x{height}.png'),full_page=True)
   if width==390 and height==844:page.screenshot(path=str(OUT/'central-mobile-first-screen.png'))
   results.append({'width':width,'height':height,'overflow':False,'font_loaded':True,'js_errors':errors,'image_assets_loaded':True});page.close()

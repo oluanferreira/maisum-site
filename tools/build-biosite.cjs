@@ -5,7 +5,13 @@ const out = process.argv[3] || 'biosite-public';
 const copy = (name) => { const dest = path.join(out, name); fs.mkdirSync(path.dirname(dest), {recursive:true}); fs.copyFileSync(path.join(source,name), dest); };
 fs.mkdirSync(out, {recursive:true});
 for (const name of ['links/central.css','links/central.js','links/assets/brand-3d.png','links/assets/discover-3d.png','links/assets/black-friday-3d.webp','links/fonts/dm-sans.woff2','links/fonts/cormorant-italic.woff2','links/fonts/dmsans-OFL.txt','links/fonts/cormorantgaramond-OFL.txt','oficial/assets/leo-gastronomia-v2.webp','oficial/assets/food-table.webp','favicon.svg','experiencias/catalogo.css','experiencias/catalogo.js']) copy(name);
-const adapt = (text) => text.replaceAll('content="noindex,nofollow"','content="index,follow"').replaceAll('https://appmaisum.com.br/links','https://bio.appmaisum.com.br/').replaceAll('https://appmaisum.com.br/experiencias','https://bio.appmaisum.com.br/experiencias').replaceAll('href="/links"','href="/"').replaceAll('aria-label="+UM, site oficial"','aria-label="+UM, central de links"');
+const checkout = 'https://app.appmaisum.com.br/checkout/black-friday';
+const adapt = (text) => text.replaceAll('content="noindex,nofollow"','content="index,follow"').replaceAll('https://appmaisum.com.br/links','https://bio.appmaisum.com.br/').replaceAll('https://appmaisum.com.br/experiencias','https://bio.appmaisum.com.br/experiencias').replaceAll('href="/links"','href="/"').replaceAll('aria-label="+UM, site oficial"','aria-label="+UM, central de links"').replaceAll('https://pay.cakto.com.br/3e7t64x_1061003?coupon=blackmaisum', checkout);
+// The app signs the member in and fixes the campaign server-side. Forward only affiliate.
+const scriptPath = path.join(out,'links/central.js');
+const script = fs.readFileSync(scriptPath,'utf8').replace("destination.origin === 'https://pay.cakto.com.br' && destination.pathname === '/3e7t64x_1061003'", "destination.origin === 'https://app.appmaisum.com.br' && destination.pathname === '/checkout/black-friday'");
+if (script.includes("destination.origin === 'https://pay.cakto.com.br'")) throw new Error('Legacy checkout attribution remains');
+fs.writeFileSync(scriptPath,script);
 const home = adapt(fs.readFileSync(path.join(source,'links/index.html'),'utf8'));
 fs.writeFileSync(path.join(out,'index.html'),home);
 fs.writeFileSync(path.join(out,'links/index.html'),home);

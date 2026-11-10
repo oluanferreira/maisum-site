@@ -28,12 +28,18 @@ with sync_playwright() as p:
   assert account.is_visible(),'account access hidden'
   assert account.inner_text().strip()=='Acessar minha conta'
   assert account.get_attribute('href')=='https://app.appmaisum.com.br/login'
-  partner=page.locator('.site-header .header-partner')
+  partner=page.locator('.partner-utility .header-partner')
   assert partner.is_visible(),'partner portal hidden'
   assert partner.get_attribute('href')=='https://restaurante.appmaisum.com.br/login'
+  assert page.locator('.site-header .header-partner').count()==0,'partner portal competes in consumer header'
+  assert page.locator('.partner-utility').get_attribute('aria-label')=='Acesso para estabelecimentos'
+  assert page.locator('.partner-utility-inner>span').inner_text()=='Para estabelecimentos'
+  assert partner.evaluate('(a)=>getComputedStyle(a).position==="static"'),'partner portal must remain in document flow'
+  assert page.locator('.partner-utility').evaluate('(el)=>{const r=el.getBoundingClientRect(),h=document.querySelector(".site-header").getBoundingClientRect(),t=document.querySelector(".hero").getBoundingClientRect();return r.top===0 && r.height>=44 && r.height<=50 && r.bottom<=h.top+1 && h.bottom<=t.top+1}'),'business strip not separate from consumer header'
+  assert page.locator('.partner-utility-inner').evaluate('(el)=>{const label=el.firstElementChild.getBoundingClientRect(),link=el.lastElementChild.getBoundingClientRect();return label.right+8<=link.left && label.top>=0 && link.bottom<=el.getBoundingClientRect().bottom+1}'),'utility label/link collision'
   assert 'Portal do parceiro' in partner.inner_text()
   assert partner.evaluate('(a)=>{const r=a.getBoundingClientRect();return r.height>=44 && r.left>=0 && r.right<=innerWidth}'),'partner touch size or position'
-  assert page.locator('.header-partner').evaluate('(a)=>{const p=a.getBoundingClientRect(),c=document.querySelector(".header-account").getBoundingClientRect();return p.top>=c.bottom || p.right<=c.left || p.left>=c.right}'),'member/partner controls overlap'
+  assert page.locator('.header-partner').evaluate('(a)=>{const p=a.getBoundingClientRect(),c=document.querySelector(".header-account").getBoundingClientRect();return p.bottom<=c.top || p.top>=c.bottom || p.right<=c.left || p.left>=c.right}'),'member/partner controls overlap'
   assert account.evaluate('(a)=>{const r=a.getBoundingClientRect();return r.height>=44 && r.top>=0 && r.right<=innerWidth && r.left>=0}'),'account target size or position'
   assert page.locator('.faq-list a[href="https://app.appmaisum.com.br/login"]').count()==1
   assert 1<=page.locator('.hero-art img').count()<=3
@@ -128,4 +134,4 @@ with sync_playwright() as p:
  page.goto('http://127.0.0.1:8132/',wait_until='networkidle');page.keyboard.press('Tab');assert page.locator('.skip-link').evaluate('(e)=>e===document.activeElement')
  nojs=browser.new_context(java_script_enabled=False,viewport={'width':390,'height':844});np=nojs.new_page();np.goto('http://127.0.0.1:8132/',wait_until='networkidle');assert np.locator('.hero-actions [data-checkout]').is_visible();assert np.locator('.header-account').is_visible();assert np.locator('.header-partner').is_visible();assert np.locator('.experience-card').count()==4;np.screenshot(path=str(OUT/'home-nojs.png'),full_page=True)
  browser.close()
-server.shutdown();(OUT/'results.json').write_text(json.dumps({'responsive':results,'affiliate_organic_valid_duplicate_invalid':True,'no_js_content':True,'keyboard':True,'faq':True,'mobile_menu':True,'checkout_intercepted_without_payment':True,'account_visible_and_login_intercepted':True,'partner_portal_visible_and_intercepted':True},indent=2));print('PASS: eight sizes, fonts, images, no overflow/JS errors, affiliate cases, no-JS, keyboard, FAQ, mobile menu.')
+server.shutdown();(OUT/'results.json').write_text(json.dumps({'responsive':results,'affiliate_organic_valid_duplicate_invalid':True,'no_js_content':True,'keyboard':True,'faq':True,'mobile_menu':True,'checkout_intercepted_without_payment':True,'account_visible_and_login_intercepted':True,'partner_portal_visible_and_intercepted':True,'partner_access_separate_from_consumer_header':True},indent=2));print('PASS: eight sizes, fonts, images, no overflow/JS errors, affiliate cases, no-JS, keyboard, FAQ, mobile menu.')

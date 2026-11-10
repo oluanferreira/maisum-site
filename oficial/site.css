@@ -198,16 +198,20 @@
 @media(max-width:600px){.hero-art-composition .hero-food-table{width:min(118%,calc(109% + 20px))}}
 @media(max-width:355px){.hero-art-composition .hero-food-table{width:min(118%,calc(109% + 16px))}}
 
-/* Separate partner access from the member account without hiding either. */
-.site-header{height:126px;padding-bottom:28px}
-.header-partner{position:absolute;right:0;bottom:-6px;display:inline-flex;align-items:center;gap:7px;min-height:44px;font-size:11px;font-weight:550;line-height:1.4;color:var(--muted);white-space:nowrap}
-.header-partner>span{font-size:15px}
-.header-partner:hover{text-decoration:underline;text-underline-offset:4px;color:var(--ink)}
-@media(max-width:850px){.site-header{height:120px;padding-bottom:38px}.header-partner{bottom:0;font-size:10px}.mobile-nav{top:calc(100% - 2px)}}
+/* A dedicated utility strip separates business access from the consumer journey.
+   Its link stays visible, in document flow, with a 44px target on every screen. */
+.partner-utility{background:#f0ebe3;border-bottom:1px solid #e4ddd2;color:#5b564d}
+.partner-utility-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:44px;font-size:12px;line-height:1.4}
+.partner-utility-inner>span{font-weight:450}
+.header-partner{display:inline-flex;align-items:center;gap:8px;min-height:44px;font-size:12px;font-weight:600;line-height:1.4;color:var(--ink);white-space:nowrap;flex:none}
+.header-partner>span{font-size:16px}
+.header-partner:hover{text-decoration:underline;text-underline-offset:4px;color:var(--rust)}
+.site-header{height:88px;padding-bottom:0}
+@media(max-width:850px){.site-header{height:80px}.mobile-nav{top:calc(100% - 2px)}}
+@media(max-width:355px){.partner-utility-inner{gap:10px;font-size:11px}.header-partner{font-size:11px;gap:6px}}
 
 /* Keep phone-sized supporting copy readable without crowding the hero. */
 @media(max-width:600px){
- .header-partner{font-size:11px}
  .hero-description{font-size:13px}
  .hero-facts>span{font-size:10px}
  .hero-facts strong{font-size:11px}

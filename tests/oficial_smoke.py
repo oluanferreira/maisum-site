@@ -31,19 +31,19 @@ with sync_playwright() as p:
   assert page.locator('.partner-utility').count()==0,'rejected partner strip returned'
   assert page.locator('.header-partner').count()==0,'floating partner link returned'
   assert page.locator('.site-header').evaluate('(el)=>el.getBoundingClientRect().top===0'),'extra row above consumer header'
-  for selector in ['.nav-partner','.mobile-partner','.footer-partner']:
+  assert page.locator('.site-header nav,.menu-toggle,#mobile-nav').count()==0,'old navigation returned'
+  assert page.locator('.site-header>a:not(.wordmark)').count()==3,'header must keep exactly three access links'
+  for selector in ['.nav-partner','.footer-partner']:
    assert page.locator(selector).get_attribute('href')=='https://restaurante.appmaisum.com.br/login'
    assert 'Portal do parceiro' in page.locator(selector).inner_text()
-  assert page.locator('.footer-partner').is_visible(),'partner footer access hidden'
-  assert page.locator('.footer-partner').evaluate('(a)=>a.getBoundingClientRect().height>=44'),'partner footer touch size'
-  if width>1200:
-   partner=page.locator('.desktop-nav .nav-partner')
-   assert partner.is_visible(),'desktop partner navigation hidden'
-   assert partner.evaluate('(a)=>{const r=a.getBoundingClientRect();return r.height>=44 && r.left>=0 && r.right<=innerWidth}'),'partner navigation size or position'
-   assert page.locator('.desktop-nav').evaluate('(nav)=>{const n=nav.getBoundingClientRect(),a=document.querySelector(".header-account").getBoundingClientRect();return n.right+8<=a.left}'),'navigation/account collision'
-  else:
-   assert not page.locator('.nav-partner').is_visible(),'desktop navigation crowded on smaller screen'
-   assert page.locator('.menu-toggle').is_visible(),'compact navigation unavailable'
+   assert page.locator(selector).is_visible(),'partner access hidden'
+   assert page.locator(selector).evaluate('(a)=>a.getBoundingClientRect().height>=44'),'partner touch size'
+  for selector in ['.header-account','.nav-partner','.header-buy']:
+   assert page.locator('.site-header '+selector).is_visible(),('header access hidden',selector)
+   assert page.locator('.site-header '+selector).evaluate('(a)=>{const r=a.getBoundingClientRect();return r.height>=44 && r.left>=0 && r.right<=innerWidth && r.bottom<innerHeight}'),('header access size/position',selector)
+  assert page.locator('.site-header').evaluate('(h)=>{const links=[...h.querySelectorAll("a")].map(a=>a.getBoundingClientRect());return links.every((a,i)=>links.slice(i+1).every(b=>a.right<=b.left || a.left>=b.right || a.bottom<=b.top || a.top>=b.bottom))}'),'header access collision'
+  if width<=850:
+   assert page.locator('.site-header').evaluate('(h)=>{const a=h.querySelector(".header-account").getBoundingClientRect(),p=h.querySelector(".nav-partner").getBoundingClientRect(),b=h.querySelector(".header-buy").getBoundingClientRect();return a.bottom<=p.top && Math.abs(p.top-b.top)<2 && h.getBoundingClientRect().height<=130}'),'compact header not aligned'
   assert account.evaluate('(a)=>{const r=a.getBoundingClientRect();return r.height>=44 && r.top>=0 && r.right<=innerWidth && r.left>=0}'),'account target size or position'
   assert page.locator('.faq-list a[href="https://app.appmaisum.com.br/login"]').count()==1
   assert 1<=page.locator('.hero-art img').count()<=3
@@ -94,16 +94,6 @@ with sync_playwright() as p:
    page.locator('.how-section').screenshot(path=str(OUT/f'how-{width}.png'))
    page.locator('.hero-promo').screenshot(path=str(OUT/f'hero-promo-{width}.png'))
    page.evaluate('window.scrollTo(0,0)')
-  if width<=1200:
-   page.locator('.menu-toggle').click();assert page.locator('#mobile-nav').is_visible()
-   partner=page.locator('#mobile-nav .mobile-partner')
-   assert partner.is_visible(),'partner missing from compact navigation'
-   assert partner.evaluate('(a)=>{const r=a.getBoundingClientRect();return r.height>=44 && r.left>=0 && r.right<=innerWidth && r.bottom<innerHeight-90}'),'partner menu target or viewport position'
-   page.screenshot(path=str(OUT/f'home-menu-{width}.png'))
-   page.keyboard.press('Escape');assert not page.locator('#mobile-nav').is_visible()
-   assert page.locator('.menu-toggle').get_attribute('aria-expanded')=='false'
-   page.locator('.menu-toggle').click();assert page.locator('#mobile-nav').is_visible()
-   page.mouse.click(2,150);assert not page.locator('#mobile-nav').is_visible()
   page.locator('.faq-list details').first.locator('summary').click();assert page.locator('.faq-list details').first.get_attribute('open') is not None
   results.append({'width':width,'height':height,'no_overflow':True,'js_errors':errors,'font_loaded':True,'hero_images_loaded':True,'hero_title_left_art_right':True,'base_fade':True});page.close()
  page=browser.new_page(viewport={'width':390,'height':844})
@@ -131,7 +121,7 @@ with sync_playwright() as p:
   route.fulfill(status=200,content_type='text/html',body='<title>QA partner login interception</title>')
  page.route('https://restaurante.appmaisum.com.br/**',partner_intercept)
  page.goto('http://127.0.0.1:8132/?affiliate=creator_test',wait_until='networkidle')
- page.locator('.menu-toggle').click();page.locator('.mobile-partner').click();page.wait_for_url('https://restaurante.appmaisum.com.br/login')
+ page.locator('.site-header .nav-partner').click();page.wait_for_url('https://restaurante.appmaisum.com.br/login')
  assert partner_requests==['https://restaurante.appmaisum.com.br/login'],partner_requests
  # Intercept the purchase destination before any checkout request is sent.
  checkout_requests=[]
@@ -143,6 +133,6 @@ with sync_playwright() as p:
  page.locator('.hero-actions [data-checkout]').click();page.wait_for_url('https://app.appmaisum.com.br/checkout/black-friday**')
  assert checkout_requests==['https://app.appmaisum.com.br/checkout/black-friday?affiliate=creator_test'],checkout_requests
  page.goto('http://127.0.0.1:8132/',wait_until='networkidle');page.keyboard.press('Tab');assert page.locator('.skip-link').evaluate('(e)=>e===document.activeElement')
- nojs=browser.new_context(java_script_enabled=False,viewport={'width':390,'height':844});np=nojs.new_page();np.goto('http://127.0.0.1:8132/',wait_until='networkidle');assert np.locator('.hero-actions [data-checkout]').is_visible();assert np.locator('.header-account').is_visible();assert np.locator('.footer-partner').is_visible();assert np.locator('.experience-card').count()==4;np.screenshot(path=str(OUT/'home-nojs.png'),full_page=True)
+ nojs=browser.new_context(java_script_enabled=False,viewport={'width':390,'height':844});np=nojs.new_page();np.goto('http://127.0.0.1:8132/',wait_until='networkidle');assert np.locator('.hero-actions [data-checkout]').is_visible();assert np.locator('.header-account').is_visible();assert np.locator('.footer-partner').is_visible();assert np.locator('.site-header .nav-partner').is_visible();assert np.locator('.site-header .header-buy').is_visible();assert np.locator('.experience-card').count()==4;np.screenshot(path=str(OUT/'home-nojs.png'),full_page=True)
  browser.close()
-server.shutdown();(OUT/'results.json').write_text(json.dumps({'responsive':results,'affiliate_organic_valid_duplicate_invalid':True,'no_js_content':True,'keyboard':True,'faq':True,'mobile_menu':True,'checkout_intercepted_without_payment':True,'account_visible_and_login_intercepted':True,'partner_navigation_and_footer_access':True,'partner_login_intercepted':True,'no_partner_strip':True},indent=2));print('PASS: nine sizes, fonts, images, no overflow/JS errors, affiliate cases, no-JS, keyboard, FAQ, mobile menu.')
+server.shutdown();(OUT/'results.json').write_text(json.dumps({'responsive':results,'affiliate_organic_valid_duplicate_invalid':True,'no_js_content':True,'keyboard':True,'faq':True,'three_header_accesses_visible':True,'checkout_intercepted_without_payment':True,'account_visible_and_login_intercepted':True,'partner_header_and_footer_access':True,'partner_login_intercepted':True,'no_partner_strip':True},indent=2));print('PASS: nine sizes, fonts, images, no overflow/JS errors, affiliate cases, no-JS, keyboard, FAQ, three visible header links.')

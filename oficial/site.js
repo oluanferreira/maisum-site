@@ -10,16 +10,6 @@
       }
     });
   }
-  const button = document.querySelector('.menu-toggle');
-  const menu = document.getElementById('mobile-nav');
-  const close = () => { button.setAttribute('aria-expanded', 'false'); button.setAttribute('aria-label', 'Abrir menu'); menu.hidden = true; };
-  button.addEventListener('click', () => {
-    const open = button.getAttribute('aria-expanded') !== 'true';
-    button.setAttribute('aria-expanded', String(open)); button.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu'); menu.hidden = !open;
-  });
-  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
-  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !menu.hidden) { close(); button.focus(); } });
-  document.addEventListener('click', e => { if (!menu.hidden && !menu.contains(e.target) && !button.contains(e.target)) close(); });
   const observer = 'IntersectionObserver' in window ? new IntersectionObserver(entries => {
     entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target); } });
   }, { threshold: 0.07 }) : null;

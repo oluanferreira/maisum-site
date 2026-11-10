@@ -44,7 +44,7 @@ class CatalogContract(unittest.TestCase):
   self.assertIn('experiências disponíveis',text)
   self.assertIn('atualmente',text)
   self.assertNotIn('data-filter="beleza"',self.page);self.assertNotIn('data-filter="pet"',self.page)
-  self.assertIn('noindex,nofollow',self.page)
+  self.assertIn('index,follow',self.page);self.assertNotIn('noindex',self.page)
  def test_accessibility_and_nojs_structure(self):
   self.assertEqual(sum(t=='h1' for t,a in self.dom.nodes),1)
   ids=[a['id'] for t,a in self.dom.nodes if 'id' in a];self.assertEqual(len(ids),len(set(ids)))
